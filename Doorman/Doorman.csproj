@@ -60,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="DataServices\IKeyDataService.cs" />
     <Compile Include="DataServices\KeyDataService.cs" />
+    <Compile Include="Models\Key.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\GetKeyViewModel.cs" />
