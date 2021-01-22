@@ -1,4 +1,4 @@
-﻿using Doorman.Models;
+﻿using Doorman.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

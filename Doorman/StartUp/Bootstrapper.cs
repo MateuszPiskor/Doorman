@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Doorman.DataServices;
+using Doorman.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Doorman.StartUp
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<KeyDataService>().As<IKeyDataService>();
+            builder.RegisterType<AddNewKeyViewModel>().AsSelf();
             return builder.Build();
         }
     }

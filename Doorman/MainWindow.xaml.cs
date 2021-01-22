@@ -22,9 +22,16 @@ namespace Doorman
     /// </summary>
     public partial class MainWindow : Window
     {
+        private AddNewKeyViewModel addNewKeyViewModel;
+
+        public MainWindow(AddNewKeyViewModel addNewKeyViewModel)
+        {
+            this.addNewKeyViewModel = addNewKeyViewModel;
+            InitializeComponent();
+        }
         public MainWindow()
         {
-            InitializeComponent();
+
         }
 
         private void GetKey_Clicked(object sender, RoutedEventArgs e)
@@ -34,7 +41,7 @@ namespace Doorman
 
         private void AddNewKey_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new AddNewKeyViewModel();
+            DataContext = addNewKeyViewModel;
         }
     }
 }

@@ -60,9 +60,9 @@
     </ApplicationDefinition>
     <Compile Include="DataServices\IKeyDataService.cs" />
     <Compile Include="DataServices\KeyDataService.cs" />
-    <Compile Include="Models\Key.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\GetKeyViewModel.cs" />
     <Compile Include="Views\AddNewKeyView.xaml.cs">
       <DependentUpon>AddNewKeyView.xaml</DependentUpon>
@@ -118,6 +118,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DoorMan.DataAccess\DoorMan.DataAccess.csproj">
+      <Project>{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}</Project>
+      <Name>DoorMan.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

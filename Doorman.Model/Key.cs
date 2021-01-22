@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Doorman.Models
+namespace Doorman.Model
 {
     public class Key
     {

@@ -1,6 +1,6 @@
 namespace DoorMan.DataAccess.Migrations
 {
-    using Doorman.Models;
+    using Doorman.Model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
