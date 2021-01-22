@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataServices\IKeyDataService.cs" />
+    <Compile Include="DataServices\KeyDataService.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\GetKeyViewModel.cs" />
