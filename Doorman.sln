@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doorman", "Doorman\Doorman.csproj", "{547EB12D-FABF-43EE-96FD-2AF5A936EA95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoorMan.DataAccess", "DoorMan.DataAccess\DoorMan.DataAccess.csproj", "{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{547EB12D-FABF-43EE-96FD-2AF5A936EA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{547EB12D-FABF-43EE-96FD-2AF5A936EA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{547EB12D-FABF-43EE-96FD-2AF5A936EA95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
