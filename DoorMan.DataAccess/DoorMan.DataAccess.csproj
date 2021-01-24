@@ -48,19 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoorManDBContext.cs" />
+    <Compile Include="DoormanDBContext.cs" />
+    <Compile Include="Entities\KeyEntity.cs" />
     <Compile Include="Migrations\202101221141584_IntialDB.cs" />
     <Compile Include="Migrations\202101221141584_IntialDB.Designer.cs">
       <DependentUpon>202101221141584_IntialDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101242006139_ChangeTableName.cs" />
+    <Compile Include="Migrations\202101242006139_ChangeTableName.Designer.cs">
+      <DependentUpon>202101242006139_ChangeTableName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Doorman\Doorman.csproj">
-      <Project>{547eb12d-fabf-43ee-96fd-2af5a936ea95}</Project>
-      <Name>Doorman</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,6 +69,15 @@
     <EmbeddedResource Include="Migrations\202101221141584_IntialDB.resx">
       <DependentUpon>202101221141584_IntialDB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101242006139_ChangeTableName.resx">
+      <DependentUpon>202101242006139_ChangeTableName.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Doorman.Model\Doorman.Model.csproj">
+      <Project>{baeffdef-fc7b-4612-b7ec-b33af27c35f5}</Project>
+      <Name>Doorman.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

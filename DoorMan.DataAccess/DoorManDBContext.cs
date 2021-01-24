@@ -1,4 +1,5 @@
-﻿using Doorman.Models;
+﻿using Doorman.Model;
+using DoorMan.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace DoorMan.DataAccess
 
         }
 
-        public DbSet<Key> Keys { get; set; }
+        public DbSet<KeyEntity> Keys { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

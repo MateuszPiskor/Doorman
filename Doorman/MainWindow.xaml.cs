@@ -1,4 +1,7 @@
 ﻿
+using Autofac;
+using Doorman.DataServices;
+using Doorman.StartUp;
 using Doorman.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,8 +25,18 @@ namespace Doorman
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        //private AddNewKeyViewModel addNewKeyViewModel;
+        //private IContainer _container;
+        private KeyDataService _keyDataSerivice;
+
+        //public MainWindow(AddNewKeyViewModel addNewKeyViewModel)
+        //{
+        //    this.addNewKeyViewModel = addNewKeyViewModel;
+        //    InitializeComponent();
+        //}
+        public MainWindow(KeyDataService keyDataService)
         {
+            _keyDataSerivice = keyDataService;
             InitializeComponent();
         }
 
@@ -34,7 +47,7 @@ namespace Doorman
 
         private void AddNewKey_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new AddNewKeyViewModel();
+            DataContext = new AddNewKeyViewModel(_keyDataSerivice);
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doorman", "Doorman\Doorman.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoorMan.DataAccess", "DoorMan.DataAccess\DoorMan.DataAccess.csproj", "{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doorman.Model", "Doorman.Model\Doorman.Model.csproj", "{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

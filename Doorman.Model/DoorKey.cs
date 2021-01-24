@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Doorman.Models
+namespace Doorman.Model
 {
-    public class Key
+    public class DoorKey
     {
         public int Id { get; set; }
         public int RoomNumber { get; set; }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using Doorman.StartUp;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,12 @@ namespace Doorman
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var bootstrapper = new Bootstrapper();
+            IContainer conteiner = bootstrapper.Bootstarp();
+            var mainWindow = conteiner.Resolve<MainWindow>();
+            mainWindow.Show();
+        }
     }
 }
