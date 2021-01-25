@@ -20,8 +20,8 @@ namespace Doorman.DataServices
 
         public void AddEmployee(Employee employee)
         {
-            var employees = doormanDBContext.Set<EmployeeEnt>();
-            var employeeEntity = new EmployeeEnt() { FirstName = employee.FirstName, LastName = employee.LastName, Department = employee.Department, Position = employee.Position };
+            var employees = doormanDBContext.Set<EmployeeEnitity>();
+            var employeeEntity = new EmployeeEnitity() { FirstName = employee.FirstName, LastName = employee.LastName, Department = employee.Department, Position = employee.Position };
             employees.Add(employeeEntity);
             doormanDBContext.SaveChanges();
         }

@@ -11,7 +11,7 @@ namespace DoorMan.DataAccess.Entities
     public class KeyEntity
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }

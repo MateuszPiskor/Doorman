@@ -18,13 +18,13 @@ namespace DoorMan.DataAccess
         }
 
         public DbSet<KeyEntity> Keys { get; set; }
-        public DbSet<EmployeeEnt> Employees { get; set; }
+        public DbSet<EmployeeEnitity> Employees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<EmployeeEnt>()
-            .Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<EmployeeEnitity>();
+            //.Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

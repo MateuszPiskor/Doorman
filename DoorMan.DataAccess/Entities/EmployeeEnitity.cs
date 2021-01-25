@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace DoorMan.DataAccess.Entities
 {
-    public class EmployeeEnt
+    public class EmployeeEnitity
     {
         [Key]
-        
         public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
