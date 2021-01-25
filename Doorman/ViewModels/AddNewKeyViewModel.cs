@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    public class AddNewKeyViewModel: ViewModelBase
+    public class AddNewKeyViewModel: ViewModelBase,IAddNewKeyViewModel
     {
         private DoorKey key= new DoorKey();
 

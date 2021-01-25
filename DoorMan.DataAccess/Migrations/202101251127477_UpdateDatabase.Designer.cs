@@ -7,13 +7,13 @@ namespace DoorMan.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class IntialDB : IMigrationMetadata
+    public sealed partial class UpdateDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(IntialDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101221141584_IntialDB"; }
+            get { return "202101251127477_UpdateDatabase"; }
         }
         
         string IMigrationMetadata.Source

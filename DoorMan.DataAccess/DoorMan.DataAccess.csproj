@@ -49,14 +49,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoormanDBContext.cs" />
+    <Compile Include="Entities\EmployeeEnt.cs" />
     <Compile Include="Entities\KeyEntity.cs" />
-    <Compile Include="Migrations\202101221141584_IntialDB.cs" />
-    <Compile Include="Migrations\202101221141584_IntialDB.Designer.cs">
-      <DependentUpon>202101221141584_IntialDB.cs</DependentUpon>
+    <Compile Include="Migrations\202101251041274_InitialDB2.cs" />
+    <Compile Include="Migrations\202101251041274_InitialDB2.Designer.cs">
+      <DependentUpon>202101251041274_InitialDB2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101242006139_ChangeTableName.cs" />
-    <Compile Include="Migrations\202101242006139_ChangeTableName.Designer.cs">
-      <DependentUpon>202101242006139_ChangeTableName.cs</DependentUpon>
+    <Compile Include="Migrations\202101251049290_AddSomeConstrains.cs" />
+    <Compile Include="Migrations\202101251049290_AddSomeConstrains.Designer.cs">
+      <DependentUpon>202101251049290_AddSomeConstrains.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101251127477_UpdateDatabase.cs" />
+    <Compile Include="Migrations\202101251127477_UpdateDatabase.Designer.cs">
+      <DependentUpon>202101251127477_UpdateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101251305111_ChangeOnePropertyName.cs" />
+    <Compile Include="Migrations\202101251305111_ChangeOnePropertyName.Designer.cs">
+      <DependentUpon>202101251305111_ChangeOnePropertyName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,18 +75,24 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101221141584_IntialDB.resx">
-      <DependentUpon>202101221141584_IntialDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101242006139_ChangeTableName.resx">
-      <DependentUpon>202101242006139_ChangeTableName.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Doorman.Model\Doorman.Model.csproj">
       <Project>{baeffdef-fc7b-4612-b7ec-b33af27c35f5}</Project>
       <Name>Doorman.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101251041274_InitialDB2.resx">
+      <DependentUpon>202101251041274_InitialDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101251049290_AddSomeConstrains.resx">
+      <DependentUpon>202101251049290_AddSomeConstrains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101251127477_UpdateDatabase.resx">
+      <DependentUpon>202101251127477_UpdateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101251305111_ChangeOnePropertyName.resx">
+      <DependentUpon>202101251305111_ChangeOnePropertyName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

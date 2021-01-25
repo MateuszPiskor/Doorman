@@ -7,13 +7,13 @@ namespace DoorMan.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangeTableName : IMigrationMetadata
+    public sealed partial class Edit : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeTableName));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Edit));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101242006139_ChangeTableName"; }
+            get { return "202101242235011_Edit"; }
         }
         
         string IMigrationMetadata.Source

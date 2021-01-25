@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace DoorMan.DataAccess.Entities
 {
-    public class KeyEntity
+    public class EmployeeEnt
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int Id { get; set; }
-        public int RoomNumber { get; set; }
-        public string RoomName { get; set; }
-
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        public string Department { get; set; }
+        public string Position { get; set; }
     }
 }

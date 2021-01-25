@@ -65,13 +65,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataServices\EmployeeDataService.cs" />
+    <Compile Include="DataServices\IEmployeeDataService.cs" />
     <Compile Include="DataServices\IKeyDataService.cs" />
     <Compile Include="DataServices\KeyDataService.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
+    <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
+    <Compile Include="ViewModels\IAddNewEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\IAddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\GetKeyViewModel.cs" />
+    <Compile Include="Views\AddNewEmployeeView.xaml.cs">
+      <DependentUpon>AddNewEmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddNewKeyView.xaml.cs">
       <DependentUpon>AddNewKeyView.xaml</DependentUpon>
     </Compile>
@@ -90,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddNewEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddNewKeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

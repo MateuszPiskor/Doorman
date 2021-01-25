@@ -16,11 +16,15 @@ namespace Doorman.StartUp
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<KeyDataService>().AsSelf();
-            builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<DoormanDBContext>().SingleInstance();
+            builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<AddNewKeyViewModel>().AsSelf();
-            
+            builder.RegisterType<KeyDataService>().AsSelf();
+            builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
+            builder.RegisterType<AddNewEmployeeViewModel>().As<IAddNewEmployeeViewModel>();
+            builder.RegisterType<AddNewKeyViewModel>().As<IAddNewKeyViewModel>();
+            builder.RegisterType<KeyDataService>().As<IKeyDataService>();
+
             return builder.Build();
         }
     }

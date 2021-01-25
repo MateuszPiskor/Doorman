@@ -20,34 +20,27 @@ using System.Windows.Shapes;
 
 namespace Doorman
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        //private AddNewKeyViewModel addNewKeyViewModel;
-        //private IContainer _container;
-        private KeyDataService _keyDataSerivice;
+        private IAddNewEmployeeViewModel _addNewEmployeeViewModel;
+        private IAddNewKeyViewModel _addNewKeyViewModel;
+       
 
-        //public MainWindow(AddNewKeyViewModel addNewKeyViewModel)
-        //{
-        //    this.addNewKeyViewModel = addNewKeyViewModel;
-        //    InitializeComponent();
-        //}
-        public MainWindow(KeyDataService keyDataService)
+        public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel )
         {
-            _keyDataSerivice = keyDataService;
+            _addNewEmployeeViewModel = addNewEmployeeViewModel;
+            _addNewKeyViewModel = addNewKeyViewModel;
             InitializeComponent();
         }
 
-        private void GetKey_Clicked(object sender, RoutedEventArgs e)
+        private void AddEmployee_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new GetKeyViewModel();
+            DataContext = _addNewEmployeeViewModel;
         }
 
         private void AddNewKey_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new AddNewKeyViewModel(_keyDataSerivice);
+            DataContext = _addNewKeyViewModel;
         }
     }
 }
