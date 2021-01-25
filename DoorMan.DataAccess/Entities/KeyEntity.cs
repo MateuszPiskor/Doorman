@@ -11,10 +11,11 @@ namespace DoorMan.DataAccess.Entities
     public class KeyEntity
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
+        public int? EmployeeId { get; set; }
+        public virtual EmployeeEnitity EmployeeEnitity { get; set; }
 
     }
 }
