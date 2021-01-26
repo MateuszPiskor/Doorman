@@ -13,7 +13,7 @@ namespace Doorman.ViewModels
 {
     public class AddNewKeyViewModel: ViewModelBase,IAddNewKeyViewModel
     {
-        private DoorKey key= new DoorKey();
+        private Model.Key key= new Model.Key();
 
         private IKeyDataService _keyDataSerivce;
         

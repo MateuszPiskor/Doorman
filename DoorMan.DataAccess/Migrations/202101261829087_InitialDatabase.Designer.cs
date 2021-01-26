@@ -7,13 +7,13 @@ namespace DoorMan.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddForeginKeyPart2 : IMigrationMetadata
+    public sealed partial class InitialDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddForeginKeyPart2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101251941419_AddForeginKeyPart2"; }
+            get { return "202101261829087_InitialDatabase"; }
         }
         
         string IMigrationMetadata.Source

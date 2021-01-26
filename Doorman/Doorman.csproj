@@ -65,8 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataServices\EmployeeDataService.cs" />
-    <Compile Include="DataServices\IEmployeeDataService.cs" />
+    <Compile Include="DataServices\EmployeeRepository.cs" />
+    <Compile Include="DataServices\GenericRepository.cs" />
+    <Compile Include="DataServices\IEmployeeRepository.cs" />
+    <Compile Include="DataServices\IGenericRepository.cs" />
     <Compile Include="DataServices\IKeyDataService.cs" />
     <Compile Include="DataServices\KeyDataService.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />

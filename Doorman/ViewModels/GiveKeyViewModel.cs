@@ -1,6 +1,6 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
-using DoorMan.DataAccess.Entities;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace Doorman.ViewModels
 {
     public class GiveKeyViewModel:ViewModelBase, IGiveKeyViewModel
     {
-        public GiveKeyViewModel(IKeyDataService keyDataSerive, IEmployeeDataService employeeDataService )
+        public GiveKeyViewModel(IKeyDataService keyDataSerive, IEmployeeRepository employeeDataService )
         {
             _keyDataService = keyDataSerive;
             _employeeDataService = employeeDataService;
@@ -21,14 +21,14 @@ namespace Doorman.ViewModels
         private string lastName;
         private int keyNumber;
         private IKeyDataService _keyDataService;
-        private IEmployeeDataService _employeeDataService;
-        GiveKeyModel giveKeyModel= new GiveKeyModel();
+        private IEmployeeRepository _employeeDataService;
+        KeyInUse keyInUse= new KeyInUse();
 
         public string FirstName
         {
             get { return firstName; }
             set { 
-                giveKeyModel.FirstName = value;
+                firstName = value;
                 OnPropertyChange();
             }
         }
@@ -37,7 +37,7 @@ namespace Doorman.ViewModels
         {
             get { return lastName; }
             set { 
-                giveKeyModel.LastName = value;
+                lastName = value;
 
             }
         }
@@ -46,7 +46,7 @@ namespace Doorman.ViewModels
         {
             get { return keyNumber; }
             set { 
-                giveKeyModel.KeyNumber = value;
+                keyNumber = value;
 
             }
         }
@@ -59,16 +59,16 @@ namespace Doorman.ViewModels
                 if (giveKey == null) giveKey = new RelayCommand(
                      (object o) =>
                      {
-                         IEnumerable<EmployeeEnitity> employees= _employeeDataService.GetAll();
-                         IEnumerable<EmployeeEnitity> duplicateEmployees = _employeeDataService.FindEmployees(employees, giveKeyModel.FirstName, giveKeyModel.LastName);
+                         IEnumerable<Employee> employees= _employeeDataService.GetAll();
+                         IEnumerable<Employee> duplicateEmployees = _employeeDataService.FindEmployees(employees, firstName, lastName);
                          if (duplicateEmployees.Count() == 1){
-                             _keyDataService.AddGiveKey(giveKeyModel);
+                             _keyDataService.AddGiveKey(keyInUse);
                              OnPropertyChange();
                          }
                      },
                      (object o) =>
                      {
-                         if (!string.IsNullOrEmpty(giveKeyModel.FirstName) && !string.IsNullOrEmpty(giveKeyModel.LastName) && giveKeyModel.KeyNumber != 0)
+                         if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName) && keyNumber != 0)
                          {
                              return true;
                          }

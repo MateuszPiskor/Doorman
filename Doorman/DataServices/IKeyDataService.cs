@@ -4,7 +4,7 @@ namespace Doorman.DataServices
 {
     public interface IKeyDataService
     {
-        void AddKey(DoorKey key);
-        void AddGiveKey(GiveKeyModel giveKeyModel);
+        void AddKey(Key key);
+        void AddGiveKey(KeyInUse giveKeyModel);
     }
 }

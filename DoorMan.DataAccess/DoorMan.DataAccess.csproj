@@ -49,35 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoormanDBContext.cs" />
-    <Compile Include="Entities\EmployeeEnitity.cs" />
-    <Compile Include="Entities\KeyEntity.cs" />
-    <Compile Include="Migrations\202101251041274_InitialDB2.cs" />
-    <Compile Include="Migrations\202101251041274_InitialDB2.Designer.cs">
-      <DependentUpon>202101251041274_InitialDB2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101251049290_AddSomeConstrains.cs" />
-    <Compile Include="Migrations\202101251049290_AddSomeConstrains.Designer.cs">
-      <DependentUpon>202101251049290_AddSomeConstrains.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101251127477_UpdateDatabase.cs" />
-    <Compile Include="Migrations\202101251127477_UpdateDatabase.Designer.cs">
-      <DependentUpon>202101251127477_UpdateDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101251305111_ChangeOnePropertyName.cs" />
-    <Compile Include="Migrations\202101251305111_ChangeOnePropertyName.Designer.cs">
-      <DependentUpon>202101251305111_ChangeOnePropertyName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101251840041_updateDB.cs" />
-    <Compile Include="Migrations\202101251840041_updateDB.Designer.cs">
-      <DependentUpon>202101251840041_updateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101251936236_AddForeginKeyPart1.cs" />
-    <Compile Include="Migrations\202101251936236_AddForeginKeyPart1.Designer.cs">
-      <DependentUpon>202101251936236_AddForeginKeyPart1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101251941419_AddForeginKeyPart2.cs" />
-    <Compile Include="Migrations\202101251941419_AddForeginKeyPart2.Designer.cs">
-      <DependentUpon>202101251941419_AddForeginKeyPart2.cs</DependentUpon>
+    <Compile Include="Migrations\202101261829087_InitialDatabase.cs" />
+    <Compile Include="Migrations\202101261829087_InitialDatabase.Designer.cs">
+      <DependentUpon>202101261829087_InitialDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,26 +67,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101251041274_InitialDB2.resx">
-      <DependentUpon>202101251041274_InitialDB2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101251049290_AddSomeConstrains.resx">
-      <DependentUpon>202101251049290_AddSomeConstrains.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101251127477_UpdateDatabase.resx">
-      <DependentUpon>202101251127477_UpdateDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101251305111_ChangeOnePropertyName.resx">
-      <DependentUpon>202101251305111_ChangeOnePropertyName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101251840041_updateDB.resx">
-      <DependentUpon>202101251840041_updateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101251936236_AddForeginKeyPart1.resx">
-      <DependentUpon>202101251936236_AddForeginKeyPart1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101251941419_AddForeginKeyPart2.resx">
-      <DependentUpon>202101251941419_AddForeginKeyPart2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101261829087_InitialDatabase.resx">
+      <DependentUpon>202101261829087_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,5 @@
 ﻿using Doorman.Model;
 using DoorMan.DataAccess;
-using DoorMan.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +17,15 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
-        public void AddGiveKey(GiveKeyModel giveKeyModel)
+        public void AddGiveKey(KeyInUse giveKeyModel)
         {
             throw new NotImplementedException();
         }
 
-        public void AddKey(DoorKey key)
+        public void AddKey(Key key)
         {
-            var keys = doormanDBContext.Set<KeyEntity>();
-            var keyEntity = new KeyEntity() { RoomName = key.RoomName, RoomNumber = key.RoomNumber }; 
+            var keys = doormanDBContext.Set<Key>();
+            var keyEntity = new Key() { RoomName = key.RoomName, RoomNumber = key.RoomNumber }; 
             keys.Add(keyEntity);
             doormanDBContext.SaveChanges();
         }

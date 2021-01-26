@@ -1,5 +1,5 @@
 ﻿using Doorman.Model;
-using DoorMan.DataAccess.Entities;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,13 +17,14 @@ namespace DoorMan.DataAccess
 
         }
 
-        public DbSet<KeyEntity> Keys { get; set; }
-        public DbSet<EmployeeEnitity> Employees { get; set; }
+        public DbSet<Key> Keys { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<KeyInUse> KeysInUse { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<EmployeeEnitity>();
+           // modelBuilder.Entity<EmployeeEnitity>();
             //.Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }

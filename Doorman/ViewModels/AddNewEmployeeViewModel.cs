@@ -13,7 +13,7 @@ namespace Doorman.ViewModels
     {
         private Employee employee = new Employee();
 
-        private IEmployeeDataService _employeeDataSerivce;
+        private IEmployeeRepository _employeeDataSerivce;
 
         public string FirstName
         {
@@ -65,7 +65,7 @@ namespace Doorman.ViewModels
             }
         }
 
-        public AddNewEmployeeViewModel(IEmployeeDataService employeeDataService)
+        public AddNewEmployeeViewModel(IEmployeeRepository employeeDataService)
         {
             _employeeDataSerivce = employeeDataService;
         }
@@ -79,7 +79,8 @@ namespace Doorman.ViewModels
                 if (addEmployee == null) addEmployee = new RelayCommand(
                        (object o) =>
                        {
-                           _employeeDataSerivce.AddEmployee(employee);
+                           _employeeDataSerivce.Add(employee);
+                           _employeeDataSerivce.SaveAsync();
                            OnPropertyChange();
                        },
                        (object o) =>
