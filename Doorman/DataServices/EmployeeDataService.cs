@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Doorman.DataServices
 {
-    class EmployeeDataService : IEmployeeDataService
+    public class EmployeeDataService : IEmployeeDataService
     {
         DoormanDBContext doormanDBContext;
 
@@ -25,5 +25,16 @@ namespace Doorman.DataServices
             employees.Add(employeeEntity);
             doormanDBContext.SaveChanges();
         }
+
+        public IEnumerable<EmployeeEnitity> FindEmployees(IEnumerable<EmployeeEnitity> employees,string FirstName, string LastName)
+        {
+           return employees.Where(e => e.FirstName == FirstName && e.LastName == LastName).ToList();
+        }
+
+        public IEnumerable<EmployeeEnitity> GetAll()
+        {
+            return doormanDBContext.Employees.ToList();
+        }
+
     }
 }

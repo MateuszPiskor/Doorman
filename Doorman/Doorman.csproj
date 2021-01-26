@@ -74,17 +74,18 @@
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\IAddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\IAddNewKeyViewModel.cs" />
+    <Compile Include="ViewModels\IGiveKeyViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\GetKeyViewModel.cs" />
+    <Compile Include="ViewModels\GiveKeyViewModel.cs" />
     <Compile Include="Views\AddNewEmployeeView.xaml.cs">
       <DependentUpon>AddNewEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddNewKeyView.xaml.cs">
       <DependentUpon>AddNewKeyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GetKeyView.xaml.cs">
-      <DependentUpon>GetKeyView.xaml</DependentUpon>
+    <Compile Include="Views\GiveKeyView.xaml.cs">
+      <DependentUpon>GiveKeyView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GetKeyView.xaml">
+    <Page Include="Views\GiveKeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

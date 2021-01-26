@@ -23,6 +23,7 @@ namespace Doorman.StartUp
             builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
             builder.RegisterType<AddNewEmployeeViewModel>().As<IAddNewEmployeeViewModel>();
             builder.RegisterType<AddNewKeyViewModel>().As<IAddNewKeyViewModel>();
+            builder.RegisterType<GiveKeyViewModel>().As<IGiveKeyViewModel>();
             builder.RegisterType<KeyDataService>().As<IKeyDataService>();
 
             return builder.Build();

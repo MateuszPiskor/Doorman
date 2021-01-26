@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Doorman.DataServices
 {
-    public class KeyDataService:IKeyDataService
+    public class KeyDataService: IKeyDataService
     {
         DoormanDBContext doormanDBContext;
 
@@ -18,14 +18,17 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
+        public void AddGiveKey(GiveKeyModel giveKeyModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddKey(DoorKey key)
         {
             var keys = doormanDBContext.Set<KeyEntity>();
             var keyEntity = new KeyEntity() { RoomName = key.RoomName, RoomNumber = key.RoomNumber }; 
             keys.Add(keyEntity);
             doormanDBContext.SaveChanges();
-            
-            
         }
     }
 }
