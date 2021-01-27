@@ -82,7 +82,9 @@
     <Compile Include="ViewModels\IAddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\IAddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\IGiveKeyViewModel.cs" />
+    <Compile Include="ViewModels\IListKeyInUseViewModel.cs" />
     <Compile Include="ViewModels\ITakeKeyViewModel.cs" />
+    <Compile Include="ViewModels\ListKeyInUseViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\TakeKeyViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -96,9 +98,13 @@
     <Compile Include="Views\GiveKeyView.xaml.cs">
       <DependentUpon>GiveKeyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ListKeyInUseView.xaml.cs">
+      <DependentUpon>ListKeyInUseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TakeKeyView.xaml.cs">
       <DependentUpon>TakeKeyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IndexConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GiveKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListKeyInUseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +174,9 @@
       <Project>{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}</Project>
       <Name>Doorman.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

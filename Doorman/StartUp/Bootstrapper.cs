@@ -28,6 +28,7 @@ namespace Doorman.StartUp
             builder.RegisterType<GiveKeyViewModel>().As<IGiveKeyViewModel>();
             builder.RegisterType<TakeKeyViewModel>().As<ITakeKeyViewModel>();
             builder.RegisterType<KeyDataService>().As<IKeyDataService>();
+            builder.RegisterType<ListKeyInUseViewModel>().As<IListKeyInUseViewModel>();
 
             return builder.Build();
         }

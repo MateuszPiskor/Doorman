@@ -1,5 +1,6 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
+using Doorman.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,6 +104,7 @@ namespace Doorman.ViewModels
         {
             if (employee.FirstName != "" && employee.LastName != "" && employee.Position!="" && employee.Department!="")
             {
+                isModelCorrect = true;
                 return true;
             }
             return false;
