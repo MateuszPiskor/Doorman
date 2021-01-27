@@ -59,20 +59,24 @@ namespace Doorman.ViewModels
                        (object o) =>
                        {
                            _keyDataSerivce.AddKey(key);
-                           OnPropertyChange();
+                           base.OnPropertyChange();
                        },
                        (object o) =>
                        {
-                           if (key.RoomNumber!=0 && key.RoomName != "")
-                           {
-                               return true;
-                           }
-                           return false;
+                           return isKeyValid();
                        });
                 return addKey;
             }
         }
-        
+
+        private bool isKeyValid()
+        {
+            if (key.RoomNumber != 0 && key.RoomName != "")
+            {
+                return true;
+            }
+            return false;
+        }
 
     }
 }

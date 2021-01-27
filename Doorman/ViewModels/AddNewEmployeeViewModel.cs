@@ -14,6 +14,14 @@ namespace Doorman.ViewModels
         private Employee employee = new Employee();
 
         private IEmployeeRepository _employeeDataSerivce;
+        private bool isModelCorrect;
+
+        public bool IsModelCorrect
+        {
+            get { return isModelCorrect; }
+            set { isModelCorrect = value; }
+        }
+
 
         public string FirstName
         {
@@ -85,10 +93,19 @@ namespace Doorman.ViewModels
                        },
                        (object o) =>
                        {
-                           return true;
+                           return checkModel();
                        });
                 return addEmployee;
             }
+        }
+
+        private bool checkModel()
+        {
+            if (employee.FirstName != "" && employee.LastName != "" && employee.Position!="" && employee.Department!="")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
