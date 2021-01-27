@@ -70,14 +70,18 @@
     <Compile Include="DataServices\IEmployeeRepository.cs" />
     <Compile Include="DataServices\IGenericRepository.cs" />
     <Compile Include="DataServices\IKeyDataService.cs" />
+    <Compile Include="DataServices\IKeyInUseRepository.cs" />
     <Compile Include="DataServices\KeyDataService.cs" />
+    <Compile Include="DataServices\KeyInUseRepository.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
     <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\IAddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\IAddNewKeyViewModel.cs" />
     <Compile Include="ViewModels\IGiveKeyViewModel.cs" />
+    <Compile Include="ViewModels\ITakeKeyViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\TakeKeyViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\GiveKeyViewModel.cs" />
     <Compile Include="Views\AddNewEmployeeView.xaml.cs">
@@ -88,6 +92,9 @@
     </Compile>
     <Compile Include="Views\GiveKeyView.xaml.cs">
       <DependentUpon>GiveKeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TakeKeyView.xaml.cs">
+      <DependentUpon>TakeKeyView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GiveKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TakeKeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

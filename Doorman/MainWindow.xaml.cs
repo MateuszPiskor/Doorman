@@ -25,12 +25,14 @@ namespace Doorman
         private IAddNewEmployeeViewModel _addNewEmployeeViewModel;
         private IAddNewKeyViewModel _addNewKeyViewModel;
         private IGiveKeyViewModel _getKeyViewModel;
+        private ITakeKeyViewModel _takeKeyViewModel;
 
-        public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel, IGiveKeyViewModel getKeyViewModel )
+        public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel, IGiveKeyViewModel getKeyViewModel, ITakeKeyViewModel takeKeyViewModel )
         {
             _addNewEmployeeViewModel = addNewEmployeeViewModel;
             _addNewKeyViewModel = addNewKeyViewModel;
             _getKeyViewModel = getKeyViewModel;
+            _takeKeyViewModel = takeKeyViewModel;
             InitializeComponent();
         }
 
@@ -47,6 +49,11 @@ namespace Doorman
         private void GetKeyViewModel_Clicked(object sender, RoutedEventArgs e)
         {
             DataContext = _getKeyViewModel;
+        }
+
+        private void TakeKey_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = _takeKeyViewModel;
         }
 
         //private void GetKeyViewModel_Clicker(object sender, RoutedEventArgs e)

@@ -1,6 +1,5 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +9,9 @@ using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    public class GiveKeyViewModel:ViewModelBase, IGiveKeyViewModel
+    public class TakeKeyViewModel: ViewModelBase,ITakeKeyViewModel
     {
-        public GiveKeyViewModel(IKeyDataService keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
+        public TakeKeyViewModel(IKeyDataService keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
         {
             _keyDataService = keyDataSerive;
             _employeeDataService = employeeDataService;
@@ -24,12 +23,13 @@ namespace Doorman.ViewModels
         private IKeyDataService _keyDataService;
         private IEmployeeRepository _employeeDataService;
         private IKeyInUseRepository _keyInUseReposiotory;
-        KeyInUse keyInUse= new KeyInUse();
+        KeyInUse keyInUse = new KeyInUse();
 
         public string FirstName
         {
             get { return firstName; }
-            set { 
+            set
+            {
                 firstName = value;
                 OnPropertyChange();
             }
@@ -38,7 +38,8 @@ namespace Doorman.ViewModels
         public string LastName
         {
             get { return lastName; }
-            set { 
+            set
+            {
                 lastName = value;
 
             }
@@ -47,35 +48,45 @@ namespace Doorman.ViewModels
         public int KeyNumber
         {
             get { return keyNumber; }
-            set { 
+            set
+            {
                 keyNumber = value;
 
             }
         }
 
-        private ICommand giveKey;
+        private ICommand takeKey;
 
-        public ICommand GiveKey
+        public ICommand TakeKey
         {
-            get {
-                if (giveKey == null) giveKey = new RelayCommand(
+            get
+            {
+                if (takeKey == null) takeKey = new RelayCommand(
                      (object o) =>
                      {
-                         keyInUse.KeyId = keyNumber;
-                         int EmployeeId= _employeeDataService.GetUserId(FirstName, LastName);
-                         keyInUse.EmployeeId = EmployeeId;
-                         _keyInUseReposiotory.Add(keyInUse);
+                         //keyInUse.KeyId = keyNumber;
+                         int employeeId = _employeeDataService.GetUserId(FirstName, LastName);
+                         //keyInUse.EmployeeId = EmployeeId;
+                         keyInUse.Id = _keyInUseReposiotory.GetKeyinUseId(keyNumber,employeeId);
+                         var keytoRemove = _keyInUseReposiotory.GetByIdAsync(keyInUse.Id).Result;
+                      
+                         _keyInUseReposiotory.Remove(keytoRemove);
                          _keyInUseReposiotory.SaveAsync();
                          base.OnPropertyChange();
-                         
+
                      },
                      (object o) =>
                      {
                          return IsDataCorrect();
+                         //if (key.RoomNumber != 0 && key.RoomName != "")
+                         //{
+                         //    return true;
+                         //}
+                         //return false;
                      });
-                return giveKey;
+                return takeKey;
             }
-           
+
         }
 
         private bool IsDataCorrect()
@@ -87,5 +98,8 @@ namespace Doorman.ViewModels
 
             return false;
         }
+    
+
     }
+
 }

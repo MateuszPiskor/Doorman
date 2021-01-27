@@ -18,13 +18,6 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
-        //public void AddEmployee(Employee employee)
-        //{
-        //    var employees = doormanDBContext.Set<Employee>();
-        //    var employeeEntity = new Employee() { FirstName = employee.FirstName, LastName = employee.LastName, Department = employee.Department, Position = employee.Position };
-        //    employees.Add(employeeEntity);
-        //    doormanDBContext.SaveChanges();
-        //}
 
         public IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees,string FirstName, string LastName)
         {
@@ -36,5 +29,10 @@ namespace Doorman.DataServices
             return doormanDBContext.Employees.ToList();
         }
 
+        public int GetUserId(string firstName, string lastName)
+        {
+            List<Employee> employee = doormanDBContext.Employees.Where(f => f.FirstName == firstName && f.LastName == lastName).Take(1).ToList();
+            return employee[0].Id;
+        }
     }
 }

@@ -20,10 +20,13 @@ namespace Doorman.StartUp
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<AddNewKeyViewModel>().AsSelf();
             builder.RegisterType<KeyDataService>().AsSelf();
+
             builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
+            builder.RegisterType<KeyInUseRepository>().As<IKeyInUseRepository>();
             builder.RegisterType<AddNewEmployeeViewModel>().As<IAddNewEmployeeViewModel>();
             builder.RegisterType<AddNewKeyViewModel>().As<IAddNewKeyViewModel>();
             builder.RegisterType<GiveKeyViewModel>().As<IGiveKeyViewModel>();
+            builder.RegisterType<TakeKeyViewModel>().As<ITakeKeyViewModel>();
             builder.RegisterType<KeyDataService>().As<IKeyDataService>();
 
             return builder.Build();

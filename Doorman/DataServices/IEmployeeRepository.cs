@@ -7,5 +7,6 @@ namespace Doorman.DataServices
     {
         IEnumerable<Employee> GetAll();
         IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees, string FirstName, string LastName);
+        int GetUserId(string firstName, string lastName);
     }
 }
