@@ -76,6 +76,7 @@
     <Compile Include="DataServices\IKeyInUseRepository.cs" />
     <Compile Include="DataServices\KeyRepository.cs" />
     <Compile Include="DataServices\KeyInUseRepository.cs" />
+    <Compile Include="Helpers\IntExtensions.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
     <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
