@@ -15,7 +15,7 @@ namespace Doorman.ViewModels
     {
         private Model.Key key= new Model.Key();
 
-        private IKeyDataService _keyDataSerivce;
+        private IKeyRepository _keyDataSerivce;
         
         public int RoomNumber {
             get
@@ -42,7 +42,7 @@ namespace Doorman.ViewModels
             }
         }
 
-        public AddNewKeyViewModel(IKeyDataService keyDataService)
+        public AddNewKeyViewModel(IKeyRepository keyDataService)
         {
             //Keys = new ObservableCollection<Key>();
 

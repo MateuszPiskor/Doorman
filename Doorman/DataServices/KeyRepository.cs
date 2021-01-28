@@ -8,19 +8,16 @@ using System.Threading.Tasks;
 
 namespace Doorman.DataServices
 {
-    public class KeyDataService: IKeyDataService
+    public class KeyRepository: GenericRepository<Key, DoormanDBContext>,
+                                   IKeyRepository
     {
         DoormanDBContext doormanDBContext;
 
-        public KeyDataService(DoormanDBContext doormanDBContext)
+        public KeyRepository(DoormanDBContext doormanDBContext):base(doormanDBContext)
         {
             this.doormanDBContext = doormanDBContext;
         }
 
-        public void AddGiveKey(KeyInUse giveKeyModel)
-        {
-            throw new NotImplementedException();
-        }
 
         public void AddKey(Key key)
         {

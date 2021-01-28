@@ -12,7 +12,7 @@ namespace Doorman.ViewModels
 {
     public class GiveKeyViewModel:ViewModelBase, IGiveKeyViewModel
     {
-        public GiveKeyViewModel(IKeyDataService keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
+        public GiveKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
         {
             _keyDataService = keyDataSerive;
             _employeeDataService = employeeDataService;
@@ -21,7 +21,7 @@ namespace Doorman.ViewModels
         private string firstName;
         private string lastName;
         private int keyNumber;
-        private IKeyDataService _keyDataService;
+        private IKeyRepository _keyDataService;
         private IEmployeeRepository _employeeDataService;
         private IKeyInUseRepository _keyInUseReposiotory;
         KeyInUse keyInUse= new KeyInUse();

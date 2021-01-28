@@ -19,7 +19,7 @@ namespace Doorman.StartUp
             builder.RegisterType<DoormanDBContext>().SingleInstance();
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<AddNewKeyViewModel>().AsSelf();
-            builder.RegisterType<KeyDataService>().AsSelf();
+            builder.RegisterType<KeyRepository>().AsSelf();
 
             builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<KeyInUseRepository>().As<IKeyInUseRepository>();
@@ -27,7 +27,8 @@ namespace Doorman.StartUp
             builder.RegisterType<AddNewKeyViewModel>().As<IAddNewKeyViewModel>();
             builder.RegisterType<GiveKeyViewModel>().As<IGiveKeyViewModel>();
             builder.RegisterType<TakeKeyViewModel>().As<ITakeKeyViewModel>();
-            builder.RegisterType<KeyDataService>().As<IKeyDataService>();
+            builder.RegisterType<EditKeyViewModel>().As<IEditKeyViewModel>();
+            builder.RegisterType<KeyRepository>().As<IKeyRepository>();
             builder.RegisterType<ListKeyInUseViewModel>().As<IListKeyInUseViewModel>();
 
             return builder.Build();
