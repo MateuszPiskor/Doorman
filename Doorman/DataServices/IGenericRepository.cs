@@ -10,6 +10,7 @@ namespace Doorman.DataServices
         Task<TEntity> GetByIdAsync(int id);
         bool HasChanges();
         void Remove(TEntity model);
+        TEntity GetLastEntity();
         Task SaveAsync();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Doorman.DataServices;
+using Doorman.Helpers;
 using Doorman.Model;
 using Doorman.Views;
 using System;
@@ -14,7 +15,18 @@ namespace Doorman.ViewModels
     {
         private Employee employee = new Employee();
 
-        private IEmployeeRepository _employeeDataSerivce;
+        private IEmployeeRepository _employeeRepository;
+
+        private string initialId;
+
+        public string InitialId
+        {
+            get { return initialId; }
+            set { initialId = value;
+                OnPropertyChange();
+            }
+        }
+
         private bool isModelCorrect;
 
         public bool IsModelCorrect
@@ -76,7 +88,10 @@ namespace Doorman.ViewModels
 
         public AddNewEmployeeViewModel(IEmployeeRepository employeeDataService)
         {
-            _employeeDataSerivce = employeeDataService;
+            _employeeRepository = employeeDataService;
+            int id = _employeeRepository.GetLastEntity().Id;
+            InitialId = id.InitialNextIdWithZeros();
+
         }
 
         ICommand addEmployee;
@@ -88,8 +103,9 @@ namespace Doorman.ViewModels
                 if (addEmployee == null) addEmployee = new RelayCommand(
                        (object o) =>
                        {
-                           _employeeDataSerivce.Add(employee);
-                           _employeeDataSerivce.SaveAsync();
+                           _employeeRepository.Add(employee);
+                           
+                           _employeeRepository.SaveAsync();
                            OnPropertyChange();
                        },
                        (object o) =>

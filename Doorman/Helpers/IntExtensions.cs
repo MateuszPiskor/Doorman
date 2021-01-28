@@ -8,9 +8,10 @@ namespace Doorman.Helpers
 {
     public static class IntExtensions
     {
-        public static string ChangeIdToIdWithInitialZeros(this int number)
+        public static string InitialNextIdWithZeros(this int number)
         {
             string IdWithInitialZeros = "";
+            number += 1;
 
             string numerAsAString= number.ToString();
 

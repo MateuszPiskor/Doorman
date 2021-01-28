@@ -22,6 +22,11 @@ namespace Doorman.DataServices
             Context.Set<TEntity>().Add(model);
         }
 
+        public TEntity GetLastEntity()
+        {
+            return Context.Set<TEntity>().ToList().Last();
+        }
+
         public virtual async Task<TEntity> GetByIdAsync(int id)
         {
             return await Context.Set<TEntity>().FindAsync(id);

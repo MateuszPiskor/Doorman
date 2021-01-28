@@ -22,6 +22,7 @@ namespace Doorman
 {
     public partial class MainWindow : Window
     {
+        private IContainer _conteiner;
         private IAddNewEmployeeViewModel _addNewEmployeeViewModel;
         private IAddNewKeyViewModel _addNewKeyViewModel;
         private IGiveKeyViewModel _getKeyViewModel;
@@ -31,6 +32,7 @@ namespace Doorman
 
         public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel, IGiveKeyViewModel getKeyViewModel, ITakeKeyViewModel takeKeyViewModel, IListKeyInUseViewModel listKeyViewModel, IEditKeyViewModel editKeyViewModel)
         {
+             _conteiner= new Bootstrapper().Bootstarp();
             _addNewEmployeeViewModel = addNewEmployeeViewModel;
             _addNewKeyViewModel = addNewKeyViewModel;
             _getKeyViewModel = getKeyViewModel;
@@ -42,7 +44,11 @@ namespace Doorman
 
         private void AddEmployee_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = _addNewEmployeeViewModel;
+            using (var scope = _conteiner.BeginLifetimeScope())
+            {
+                var addNewEmployeeViewModel = scope.Resolve<IAddNewEmployeeViewModel>();
+                DataContext = addNewEmployeeViewModel;
+            }
         }
 
         private void AddNewKey_Clicked(object sender, RoutedEventArgs e)

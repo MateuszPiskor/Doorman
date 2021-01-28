@@ -17,7 +17,7 @@ namespace Doorman.Tests
         public void ShouldReturnThreeInitialZero ()
         {
             int i = 1;
-            string numberWithInitialZZeros= i.ChangeIdToIdWithInitialZeros();
+            string numberWithInitialZZeros= i.InitialNextIdWithZeros();
             Assert.Equal("0001", numberWithInitialZZeros);
         }
 
@@ -25,7 +25,7 @@ namespace Doorman.Tests
         public void ShouldReturnTwoInitialZero()
         {
             int i = 34;
-            string numberWithInitialZZeros = i.ChangeIdToIdWithInitialZeros();
+            string numberWithInitialZZeros = i.InitialNextIdWithZeros();
             Assert.Equal("0034", numberWithInitialZZeros);
         }
 
@@ -33,7 +33,7 @@ namespace Doorman.Tests
         public void ShouldReturnNumberAsAString()
         {
             int i = 1234;
-            string numberWithInitialZZeros = i.ChangeIdToIdWithInitialZeros();
+            string numberWithInitialZZeros = i.InitialNextIdWithZeros();
             Assert.Equal("1234", numberWithInitialZZeros);
         }
 
