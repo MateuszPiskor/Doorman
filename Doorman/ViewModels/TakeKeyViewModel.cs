@@ -1,30 +1,22 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    public class TakeKeyViewModel: ViewModelBase,ITakeKeyViewModel
+    public class TakeKeyViewModel : ViewModelBase, ITakeKeyViewModel
     {
-        public TakeKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
-        {
-            _keyDataService = keyDataSerive;
-            _employeeDataService = employeeDataService;
-            _keyInUseReposiotory = keyInUseReposiotory;
-        }
-        private string firstName;
-        private string lastName;
-        private int keyNumber;
-        private IKeyRepository _keyDataService;
+        #region private members
         private IEmployeeRepository _employeeDataService;
-        private IKeyInUseRepository _keyInUseReposiotory;
+        private string firstName;
         KeyInUse keyInUse = new KeyInUse();
-
+        private IKeyRepository _keyDataService;
+        private IKeyInUseRepository _keyInUseReposiotory;
+        private int keyNumber;
+        private string lastName;
+        private ICommand takeKey;
+        #endregion
+        #region properties
         public string FirstName
         {
             get { return firstName; }
@@ -34,17 +26,6 @@ namespace Doorman.ViewModels
                 OnPropertyChange();
             }
         }
-
-        public string LastName
-        {
-            get { return lastName; }
-            set
-            {
-                lastName = value;
-
-            }
-        }
-
         public int KeyNumber
         {
             get { return keyNumber; }
@@ -54,22 +35,30 @@ namespace Doorman.ViewModels
 
             }
         }
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
 
-        private ICommand takeKey;
-
+            }
+        }
         public ICommand TakeKey
         {
             get
             {
-                if (takeKey == null) takeKey = new RelayCommand(
+                if (takeKey == null)
+                {
+                    takeKey = new RelayCommand(
                      (object o) =>
                      {
                          //keyInUse.KeyId = keyNumber;
                          int employeeId = _employeeDataService.GetUserId(FirstName, LastName);
                          //keyInUse.EmployeeId = EmployeeId;
-                         keyInUse.Id = _keyInUseReposiotory.GetKeyinUseId(keyNumber,employeeId);
+                         keyInUse.Id = _keyInUseReposiotory.GetKeyinUseId(keyNumber, employeeId);
                          var keytoRemove = _keyInUseReposiotory.GetByIdAsync(keyInUse.Id).Result;
-                      
+
                          _keyInUseReposiotory.Remove(keytoRemove);
                          _keyInUseReposiotory.SaveAsync();
                          base.OnPropertyChange();
@@ -84,11 +73,22 @@ namespace Doorman.ViewModels
                          //}
                          //return false;
                      });
+                }
+
                 return takeKey;
             }
 
         }
-
+        #endregion
+        #region costructors
+        public TakeKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
+        {
+            _keyDataService = keyDataSerive;
+            _employeeDataService = employeeDataService;
+            _keyInUseReposiotory = keyInUseReposiotory;
+        }
+        #endregion
+        #region privatemethods
         private bool IsDataCorrect()
         {
             if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName) && keyNumber != 0)
@@ -98,8 +98,7 @@ namespace Doorman.ViewModels
 
             return false;
         }
-    
-
+        #endregion
     }
 
 }

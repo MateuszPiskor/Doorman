@@ -15,18 +15,6 @@ namespace DoorMan.DataAccess.Migrations
 
         protected override void Seed(DoorMan.DataAccess.DoormanDBContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
             context.Keys.AddOrUpdate(
               p => p.RoomNumber,
               new Key { RoomNumber = 101, RoomName = "Room1", },
@@ -43,16 +31,16 @@ namespace DoorMan.DataAccess.Migrations
 
             context.Employees.AddOrUpdate(
               p => p.FirstName,
-              new Employee { FirstName = "FirstName1", LastName = "LastName1",Department="Department1",Position="Position1" },
-              new Employee { FirstName = "FirstName2", LastName = "LastName2",Department="Department2",Position="Position2" },
-              new Employee { FirstName = "FirstName3", LastName = "LastName3",Department="Department3",Position="Position3" },
-              new Employee { FirstName = "FirstName4", LastName = "LastName4",Department="Department4",Position="Position4" },
-              new Employee { FirstName = "FirstName5", LastName = "LastName5",Department="Department5",Position="Position5" },
-              new Employee { FirstName = "FirstName6", LastName = "LastName6",Department="Department6",Position="Position6" },
-              new Employee { FirstName = "FirstName7", LastName = "LastName7",Department="Department7",Position="Position7" },
-              new Employee { FirstName = "FirstName8", LastName = "LastName8",Department="Department8",Position="Position8" },
-              new Employee { FirstName = "FirstName9", LastName = "LastName9",Department="Department9",Position="Position9" },
-              new Employee { FirstName = "FirstName10", LastName = "LastName10",Department="Department10",Position="Position10" }
+              new Employee { FirstName = "FirstName1", LastName = "LastName1", Department = "Department1", Position = "Position1" },
+              new Employee { FirstName = "FirstName2", LastName = "LastName2", Department = "Department2", Position = "Position2" },
+              new Employee { FirstName = "FirstName3", LastName = "LastName3", Department = "Department3", Position = "Position3" },
+              new Employee { FirstName = "FirstName4", LastName = "LastName4", Department = "Department4", Position = "Position4" },
+              new Employee { FirstName = "FirstName5", LastName = "LastName5", Department = "Department5", Position = "Position5" },
+              new Employee { FirstName = "FirstName6", LastName = "LastName6", Department = "Department6", Position = "Position6" },
+              new Employee { FirstName = "FirstName7", LastName = "LastName7", Department = "Department7", Position = "Position7" },
+              new Employee { FirstName = "FirstName8", LastName = "LastName8", Department = "Department8", Position = "Position8" },
+              new Employee { FirstName = "FirstName9", LastName = "LastName9", Department = "Department9", Position = "Position9" },
+              new Employee { FirstName = "FirstName10", LastName = "LastName10", Department = "Department10", Position = "Position10" }
             );
         }
     }

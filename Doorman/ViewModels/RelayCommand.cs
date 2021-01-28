@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-
 
 class RelayCommand : ICommand
 {
     //Zdarzenie  wywolywane co jakis czas, sprawdzajace co zwraca metoda CanExecute to funkcjonalnosc mozemy zlecic wbudowanej klasie commandManager
-    public event EventHandler CanExecuteChanged 
+    public event EventHandler CanExecuteChanged
     {
         add
         {
@@ -27,19 +22,29 @@ class RelayCommand : ICommand
     Func<object, bool> canExecute;
 
     //can execute nie musi byc przekazywany, w takim wypadku zwroci true;
-    public RelayCommand(Action<object> execute, Func<object, bool> canExecute=null)
+    public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
     {
         //w przypadku gdy nie mamy refererencji do funkcji can execute zwracamy wyjatek
-        if (execute == null) throw new ArgumentNullException(nameof(execute));
+        if (execute == null)
+        {
+            throw new ArgumentNullException(nameof(execute));
+        }
+
         this.execute = execute;
         this.canExecute = canExecute;
     }
 
     public bool CanExecute(object parameter)
     {
-        if (canExecute == null) return true;
+        if (canExecute == null)
+        {
+            return true;
+        }
         //wywolanie funkcji przekazenej przez delegat
-        else return canExecute(parameter);
+        else
+        {
+            return canExecute(parameter);
+        }
     }
 
     public void Execute(object parameter)

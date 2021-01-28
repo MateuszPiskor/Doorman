@@ -13,7 +13,7 @@ namespace Doorman.Model
         [Required]
         public int RoomNumber { get; set; }
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string RoomName { get; set; }
     }
 }

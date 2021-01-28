@@ -18,7 +18,7 @@ namespace Doorman.Tests
         {
             int i = 1;
             string numberWithInitialZZeros= i.InitialNextIdWithZeros();
-            Assert.Equal("0001", numberWithInitialZZeros);
+            Assert.Equal("0002", numberWithInitialZZeros);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace Doorman.Tests
         {
             int i = 34;
             string numberWithInitialZZeros = i.InitialNextIdWithZeros();
-            Assert.Equal("0034", numberWithInitialZZeros);
+            Assert.Equal("0035", numberWithInitialZZeros);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Doorman.Tests
         {
             int i = 1234;
             string numberWithInitialZZeros = i.InitialNextIdWithZeros();
-            Assert.Equal("1234", numberWithInitialZZeros);
+            Assert.Equal("1235", numberWithInitialZZeros);
         }
 
     }

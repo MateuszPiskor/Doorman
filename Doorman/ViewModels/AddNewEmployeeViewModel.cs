@@ -1,41 +1,22 @@
 ﻿using Doorman.DataServices;
 using Doorman.Helpers;
 using Doorman.Model;
-using Doorman.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
     class AddNewEmployeeViewModel : ViewModelBase, IAddNewEmployeeViewModel
     {
+        #region private members
         private Employee employee = new Employee();
 
         private IEmployeeRepository _employeeRepository;
 
         private string initialId;
-
-        public string InitialId
-        {
-            get { return initialId; }
-            set { initialId = value;
-                OnPropertyChange();
-            }
-        }
-
         private bool isModelCorrect;
-
-        public bool IsModelCorrect
-        {
-            get { return isModelCorrect; }
-            set { isModelCorrect = value; }
-        }
-
-
+        ICommand addEmployee;
+        #endregion
+        #region properties
         public string FirstName
         {
             get
@@ -48,7 +29,20 @@ namespace Doorman.ViewModels
                 OnPropertyChange(nameof(FirstName));
             }
         }
-
+        public string InitialId
+        {
+            get { return initialId; }
+            set
+            {
+                initialId = value;
+                OnPropertyChange();
+            }
+        }
+        public bool IsModelCorrect
+        {
+            get { return isModelCorrect; }
+            set { isModelCorrect = value; }
+        }
         public string LastName
         {
             get
@@ -85,26 +79,17 @@ namespace Doorman.ViewModels
                 OnPropertyChange(nameof(Position));
             }
         }
-
-        public AddNewEmployeeViewModel(IEmployeeRepository employeeDataService)
-        {
-            _employeeRepository = employeeDataService;
-            int id = _employeeRepository.GetLastEntity().Id;
-            InitialId = id.InitialNextIdWithZeros();
-
-        }
-
-        ICommand addEmployee;
-
         public ICommand AddEmployee
         {
             get
             {
-                if (addEmployee == null) addEmployee = new RelayCommand(
+                if (addEmployee == null)
+                {
+                    addEmployee = new RelayCommand(
                        (object o) =>
                        {
                            _employeeRepository.Add(employee);
-                           
+
                            _employeeRepository.SaveAsync();
                            OnPropertyChange();
                        },
@@ -112,18 +97,31 @@ namespace Doorman.ViewModels
                        {
                            return checkModel();
                        });
+                }
+
                 return addEmployee;
             }
         }
+        #endregion
+        #region costructors
+        public AddNewEmployeeViewModel(IEmployeeRepository employeeDataService)
+        {
+            _employeeRepository = employeeDataService;
+            int id = _employeeRepository.GetLastEntity() == null ? 0 : _employeeRepository.GetLastEntity().Id;
+            InitialId = id.InitialNextIdWithZeros();
 
+        }
+        #endregion
+        #region privatemethods
         private bool checkModel()
         {
-            if (employee.FirstName != "" && employee.LastName != "" && employee.Position!="" && employee.Department!="")
+            if (employee.FirstName != "" && employee.LastName != "" && employee.Position != "" && employee.Department != "")
             {
                 isModelCorrect = true;
                 return true;
             }
             return false;
         }
+        #endregion
     }
 }

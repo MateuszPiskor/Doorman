@@ -2,7 +2,7 @@
 
 namespace Doorman.DataServices
 {
-    public interface IKeyRepository: IGenericRepository<Key>
+    public interface IKeyRepository : IGenericRepository<Key>
     {
         void AddKey(Key key);
     }

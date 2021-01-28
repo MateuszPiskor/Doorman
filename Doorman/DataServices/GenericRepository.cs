@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Doorman.DataServices
@@ -24,7 +22,7 @@ namespace Doorman.DataServices
 
         public TEntity GetLastEntity()
         {
-            return Context.Set<TEntity>().ToList().Last();
+            return Context.Set<TEntity>().ToList().LastOrDefault();
         }
 
         public virtual async Task<TEntity> GetByIdAsync(int id)

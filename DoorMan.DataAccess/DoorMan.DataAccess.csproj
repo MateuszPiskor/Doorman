@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoormanDBContext.cs" />
-    <Compile Include="Migrations\202101261829087_InitialDatabase.cs" />
-    <Compile Include="Migrations\202101261829087_InitialDatabase.Designer.cs">
-      <DependentUpon>202101261829087_InitialDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202101281448007_InitialDatabase.cs" />
+    <Compile Include="Migrations\202101281448007_InitialDatabase.Designer.cs">
+      <DependentUpon>202101281448007_InitialDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +67,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101261829087_InitialDatabase.resx">
-      <DependentUpon>202101261829087_InitialDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101281448007_InitialDatabase.resx">
+      <DependentUpon>202101281448007_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

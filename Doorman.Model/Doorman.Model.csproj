@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Key.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="GiveKeyModel.cs" />
     <Compile Include="KeyInUse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

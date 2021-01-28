@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Doorman.Helpers
+﻿namespace Doorman.Helpers
 {
     public static class IntExtensions
     {
@@ -13,7 +7,7 @@ namespace Doorman.Helpers
             string IdWithInitialZeros = "";
             number += 1;
 
-            string numerAsAString= number.ToString();
+            string numerAsAString = number.ToString();
 
             IdWithInitialZeros += numerAsAString;
 
@@ -23,7 +17,5 @@ namespace Doorman.Helpers
             }
             return IdWithInitialZeros;
         }
-
-
     }
 }

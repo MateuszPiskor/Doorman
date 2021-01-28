@@ -18,7 +18,6 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
-
         public void AddKey(Key key)
         {
             var keys = doormanDBContext.Set<Key>();

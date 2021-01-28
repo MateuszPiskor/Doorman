@@ -13,7 +13,7 @@ namespace DoorMan.DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202101261829087_InitialDatabase"; }
+            get { return "202101281448007_InitialDatabase"; }
         }
         
         string IMigrationMetadata.Source

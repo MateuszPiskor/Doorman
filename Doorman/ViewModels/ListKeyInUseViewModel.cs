@@ -1,23 +1,29 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Doorman.ViewModels
 {
     class ListKeyInUseViewModel : ViewModelBase, IListKeyInUseViewModel
     {
+        #region private members
         private IKeyInUseRepository _keyInUseRepository;
-
+        #endregion
+        #region properties
         public ListKeyInUseViewModel(IKeyInUseRepository keyInUseRepository)
         {
             _keyInUseRepository = keyInUseRepository;
             LoadAsync();
         }
+        public ObservableCollection<KeyInUse> KeysInUse { get; } = new ObservableCollection<KeyInUse>();
+        #endregion
+        #region costructors
+        #endregion
+        #region privatemethods
+        #endregion
+        #region public methods
         public async Task LoadAsync()
         {
             IEnumerable<Model.KeyInUse> keysInUse = await _keyInUseRepository.GetAllAsync();
@@ -27,7 +33,6 @@ namespace Doorman.ViewModels
                 KeysInUse.Add(item);
             }
         }
-
-        public ObservableCollection<KeyInUse> KeysInUse { get; } = new ObservableCollection<KeyInUse>();
+        #endregion
     }
 }

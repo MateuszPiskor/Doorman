@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0"  Content="Imie" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="1" Text="{Binding FirstName,
+        <TextBox Grid.Row="1" Visibility="{Binding HiddenName}" Text="{Binding FirstName,
                 Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
         <Label Grid.Row="2"  Content="Nazwisko" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
         <TextBox Grid.Row="3"   Text="{Binding LastName,
@@ -27,6 +27,9 @@
         <Label Grid.Row="4"  Content="Numer klucza" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
         <TextBox Grid.Row="5"  Text="{Binding KeyNumber,
                 Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        <Label Grid.Row="6"  Content="Podaj ID Pracownika" Visibility="{Binding IdVisibityState}" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
+        <TextBox Grid.Row="7"  Text="{Binding EmployeId, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding IdVisibityState}"
+                 Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
         <StackPanel Grid.Row="8" Orientation="Horizontal">
             <Button  Content="Potwierd odbiór klucza" Command="{Binding GiveKey}" HorizontalAlignment="Left" Margin="10 0 10 10"></Button>
         </StackPanel>

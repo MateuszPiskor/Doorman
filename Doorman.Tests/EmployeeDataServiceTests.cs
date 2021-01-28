@@ -1,12 +1,11 @@
 using Autofac;
 using Doorman.DataServices;
+using Doorman.Model;
 using Doorman.StartUp;
 using DoorMan.DataAccess;
-using System;
 using System.Collections.Generic;
-using Xunit;
 using System.Linq;
-using Doorman.Model;
+using Xunit;
 
 namespace Doorman.Tests
 {
@@ -36,17 +35,9 @@ namespace Doorman.Tests
 
             _doormanDBContext = _conteiner.Resolve<DoormanDBContext>();
 
-            //var employeeDataService = new EmployeeDataService(_doormanDBContext);
-            var employeeList = _employeeDataService.FindEmployees(employees,"Mateusz", "Piskor");
+            var employeeList = _employeeDataService.FindEmployeesWithTheSameNameAndSurname(employees, "Mateusz", "Piskor");
 
             Assert.Equal(2, employeeList.Count());
-
-        }
-
-        [Fact]
-        public void Test()
-        {
-            var employees= _employeeDataService.GetAll();
         }
     }
 }

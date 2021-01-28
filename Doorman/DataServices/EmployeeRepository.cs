@@ -1,10 +1,7 @@
 ﻿using Doorman.Model;
 using DoorMan.DataAccess;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Doorman.DataServices
 {
@@ -13,15 +10,14 @@ namespace Doorman.DataServices
     {
         DoormanDBContext doormanDBContext;
 
-        public EmployeeRepository(DoormanDBContext doormanDBContext):base(doormanDBContext)
+        public EmployeeRepository(DoormanDBContext doormanDBContext) : base(doormanDBContext)
         {
             this.doormanDBContext = doormanDBContext;
         }
 
-
-        public IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees,string FirstName, string LastName)
+        public IEnumerable<Employee> FindEmployeesWithTheSameNameAndSurname(IEnumerable<Employee> employees, string FirstName, string LastName)
         {
-           return employees.Where(e => e.FirstName == FirstName && e.LastName == LastName).ToList();
+            return employees.Where(e => e.FirstName == FirstName && e.LastName == LastName).ToList();
         }
 
         public IEnumerable<Employee> GetAll()

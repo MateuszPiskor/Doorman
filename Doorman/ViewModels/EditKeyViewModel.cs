@@ -1,54 +1,45 @@
 ﻿using Doorman.DataServices;
-using Doorman.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Key = Doorman.Model.Key;
 
 namespace Doorman.ViewModels
 {
-    public class EditKeyViewModel: ViewModelBase, IEditKeyViewModel
+    public class EditKeyViewModel : ViewModelBase, IEditKeyViewModel
     {
-        Key key= new Key();
-
+        #region private members
+        Key key = new Key();
         private Key keyFound;
-
+        private int id;
+        private IKeyRepository _keyRepository;
+        ICommand addKey;
+        #endregion
+        #region properties
         public Key KeyForund
         {
             get { return keyFound; }
-            set { keyFound = value;
+            set
+            {
+                keyFound = value;
                 OnPropertyChange();
 
             }
         }
-
-
-        private int id;
-
         public int Id
         {
             get { return id; }
-            set { id = value;
+            set
+            {
+                id = value;
                 OnPropertyChange();
             }
         }
-
-        public EditKeyViewModel(IKeyRepository keyRepository)
-        {
-            _keyRepository = keyRepository;
-        }
-
-        ICommand addKey;
-        private IKeyRepository _keyRepository;
-
         public ICommand SearchKey
         {
             get
             {
-                if (addKey == null) addKey = new RelayCommand(
+                if (addKey == null)
+                {
+                    addKey = new RelayCommand(
                        (object o) =>
                        {
                            keyFound = _keyRepository.GetByIdAsync(id).Result;
@@ -62,8 +53,19 @@ namespace Doorman.ViewModels
                            }
                            return false;
                        });
+                }
+
                 return addKey;
             }
         }
+        #endregion
+        #region costructors
+        public EditKeyViewModel(IKeyRepository keyRepository)
+        {
+            _keyRepository = keyRepository;
+        }
+        #endregion
+        #region privatemethods
+        #endregion
     }
 }
