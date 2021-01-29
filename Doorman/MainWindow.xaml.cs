@@ -3,6 +3,7 @@ using Autofac;
 using Doorman.DataServices;
 using Doorman.StartUp;
 using Doorman.ViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ using System.Windows.Shapes;
 
 namespace Doorman
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private IContainer _conteiner;
         private IAddNewEmployeeViewModel _addNewEmployeeViewModel;
