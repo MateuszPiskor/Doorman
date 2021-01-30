@@ -30,8 +30,9 @@ namespace Doorman
         private ITakeKeyViewModel _takeKeyViewModel;
         private IListKeyInUseViewModel _listKeyViewModel;
         private IEditKeyViewModel _editKeyViewModel;
+        private IRemoveKeyViewModel _removeKeyViewModel;
 
-        public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel, IGiveKeyViewModel getKeyViewModel, ITakeKeyViewModel takeKeyViewModel, IListKeyInUseViewModel listKeyViewModel, IEditKeyViewModel editKeyViewModel)
+        public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel, IGiveKeyViewModel getKeyViewModel, ITakeKeyViewModel takeKeyViewModel, IListKeyInUseViewModel listKeyViewModel, IEditKeyViewModel editKeyViewModel, IRemoveKeyViewModel removeKeyViewModel)
         {
              _conteiner= new Bootstrapper().Bootstarp();
             _addNewEmployeeViewModel = addNewEmployeeViewModel;
@@ -40,6 +41,7 @@ namespace Doorman
             _takeKeyViewModel = takeKeyViewModel;
             _listKeyViewModel = listKeyViewModel;
             _editKeyViewModel = editKeyViewModel;
+            _removeKeyViewModel = removeKeyViewModel;
             InitializeComponent();
         }
 
@@ -76,6 +78,13 @@ namespace Doorman
         {
             DataContext = _editKeyViewModel;
         }
+
+
+        private void RemoveKey_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = _removeKeyViewModel;
+        }
+
 
         //private void GetKeyViewModel_Clicker(object sender, RoutedEventArgs e)
         //{

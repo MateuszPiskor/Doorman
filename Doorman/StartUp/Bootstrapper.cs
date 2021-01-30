@@ -25,6 +25,7 @@ namespace Doorman.StartUp
             builder.RegisterType<EditKeyViewModel>().As<IEditKeyViewModel>();
             builder.RegisterType<KeyRepository>().As<IKeyRepository>();
             builder.RegisterType<ListKeyInUseViewModel>().As<IListKeyInUseViewModel>();
+            builder.RegisterType<RemoveKeyViewModel>().As<IRemoveKeyViewModel>();
 
             return builder.Build();
         }

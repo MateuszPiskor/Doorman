@@ -12,7 +12,7 @@ namespace Doorman.ViewModels
         private IKeyRepository _keyDataSerivce;
         private bool isKeyValid()
         {
-            if (keyWrapper.RoomNumber != 0 && keyWrapper.RoomName != "")
+            if (keyWrapper.RoomNumber != 0)
             {
                 return true;
             }

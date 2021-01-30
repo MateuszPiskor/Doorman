@@ -99,9 +99,11 @@
     <Compile Include="ViewModels\IEditKeyViewModel.cs" />
     <Compile Include="ViewModels\IGiveKeyViewModel.cs" />
     <Compile Include="ViewModels\IListKeyInUseViewModel.cs" />
+    <Compile Include="ViewModels\IRemoveKeyViewModel.cs" />
     <Compile Include="ViewModels\ITakeKeyViewModel.cs" />
     <Compile Include="ViewModels\ListKeyInUseViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\RemoveKeyViewModel.cs" />
     <Compile Include="ViewModels\TakeKeyViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\GiveKeyViewModel.cs" />
@@ -119,6 +121,9 @@
     </Compile>
     <Compile Include="Views\ListKeyInUseView.xaml.cs">
       <DependentUpon>ListKeyInUseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemoveKeyView.xaml.cs">
+      <DependentUpon>RemoveKeyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TakeKeyView.xaml.cs">
       <DependentUpon>TakeKeyView.xaml</DependentUpon>
@@ -157,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ListKeyInUseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemoveKeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
