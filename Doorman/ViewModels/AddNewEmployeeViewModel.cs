@@ -6,10 +6,10 @@ using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    class AddNewEmployeeViewModel : ViewModelBase, IAddNewEmployeeViewModel
+    class AddNewEmployeeViewModel : NotficationErrorBaseClass, IAddNewEmployeeViewModel
     {
         #region private members
-        private EmployeeWrapper _employee = new EmployeeWrapper( new Employee());
+        private EmployeeWrapper _employee = new EmployeeWrapper(new Employee());
         private IEmployeeRepository _employeeRepository;
         private string initialId;
         private bool isModelCorrect;
@@ -55,7 +55,7 @@ namespace Doorman.ViewModels
                        },
                        (object o) =>
                        {
-                           return checkModel();
+                           return AreAllPropertiesFielled() && Employee != null && !Employee.HasErrors;
                        });
                 }
 
@@ -73,14 +73,14 @@ namespace Doorman.ViewModels
         }
         #endregion
         #region privatemethods
-        private bool checkModel()
+        private bool AreAllPropertiesFielled()
         {
-            if (_employee.FirstName != "" && _employee.LastName != "" && _employee.Position != "" && _employee.Department != "")
+            if (_employee.FirstName == null || _employee.LastName == null || _employee.Position == null || _employee.Department == null)
             {
-                isModelCorrect = true;
-                return true;
+
+                return false;
             }
-            return false;
+            return true;
         }
         #endregion
     }
