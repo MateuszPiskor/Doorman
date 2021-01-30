@@ -17,9 +17,11 @@ namespace Doorman.Wrappers
 
         private string firstName;
         private string lastName;
-        private int employeeID;
+        private int employeeId;
         private int keyId;
-        
+        private string showEmployeeId;
+
+
         public string FirstName
         {
             get { return firstName; }
@@ -38,8 +40,8 @@ namespace Doorman.Wrappers
         }
         public int EmployeeId
         {
-            get { return employeeID; }
-            set { employeeID = value;
+            get { return employeeId; }
+            set { employeeId = value;
                 OnPropertyChange();
                 ValidateProperty(nameof(EmployeeId));
             }
@@ -50,6 +52,17 @@ namespace Doorman.Wrappers
             set { keyId = value;
                 OnPropertyChange();
                 ValidateProperty(nameof(KeyId));
+            }
+        }
+
+        public string ShowEmployeeId
+        {
+            get { return showEmployeeId; }
+            set
+            {
+                showEmployeeId = value;
+                OnPropertyChange();
+                ValidateProperty(nameof(ShowEmployeeId));
             }
         }
 

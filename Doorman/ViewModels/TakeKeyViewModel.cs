@@ -57,7 +57,7 @@ namespace Doorman.ViewModels
                          int employeeId = _employeeDataService.GetUserId(FirstName, LastName);
                          //keyInUse.EmployeeId = EmployeeId;
                          keyInUse.Id = _keyInUseReposiotory.GetKeyinUseId(keyNumber, employeeId);
-                         var keytoRemove = _keyInUseReposiotory.GetByIdAsync(keyInUse.Id).Result;
+                         var keytoRemove = _keyInUseReposiotory.GetById(keyInUse.Id);
 
                          _keyInUseReposiotory.Remove(keytoRemove);
                          _keyInUseReposiotory.SaveAsync();

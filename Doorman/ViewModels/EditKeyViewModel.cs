@@ -42,7 +42,7 @@ namespace Doorman.ViewModels
                     addKey = new RelayCommand(
                        (object o) =>
                        {
-                           keyFound = _keyRepository.GetByIdAsync(id).Result;
+                           keyFound = _keyRepository.GetById(id);
                            base.OnPropertyChange();
                        },
                        (object o) =>

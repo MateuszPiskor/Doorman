@@ -12,5 +12,6 @@ namespace Doorman.Model
         public string LastName { get; set; }
         public string EmployeeId { get; set; }
         public int KeyId { get; set; }
+        public string ShowEmployeeId { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace Doorman.DataServices
     {
         void Add(TEntity model);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetByIdAsync(int id);
+        TEntity GetById(int id);
         bool HasChanges();
         void Remove(TEntity model);
         TEntity GetLastEntity();
