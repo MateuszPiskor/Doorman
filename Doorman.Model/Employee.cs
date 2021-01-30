@@ -16,6 +16,6 @@ namespace Doorman.Model
         public string Department { get; set; }
         [Required]
         [StringLength(50)]
-        public string Position { get; set; }
+        public string Positon { get; set; }
     }
 }

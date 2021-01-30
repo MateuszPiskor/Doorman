@@ -49,10 +49,10 @@ namespace Doorman.Wrappers
 
         public string Position
         {
-            get { return Model.Position; }
+            get { return Model.Positon; }
             set
             {
-                Model.Position = value;
+                Model.Positon = value;
                 OnPropertyChange();
                 ValidateProperty(nameof(Position));
             }

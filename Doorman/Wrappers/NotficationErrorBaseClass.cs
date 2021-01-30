@@ -45,5 +45,6 @@ namespace Doorman.Wrappers
                 OnErrorsChanged(propertyName);
             }
         }
+        
     }
 }

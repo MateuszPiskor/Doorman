@@ -1,6 +1,6 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
-
+using Doorman.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,96 +11,34 @@ using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    public class GiveKeyViewModel:ViewModelBase, IGiveKeyViewModel
+    public class GiveKeyViewModel: NotficationErrorBaseClass, IGiveKeyViewModel
     {
+        #region constructors
+        public GiveKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeRepository, IKeyInUseRepository keyInUseReposiotory)
+        {
+            _keyDataService = keyDataSerive;
+            _employeeRepository = employeeRepository;
+            _keyInUseReposiotory = keyInUseReposiotory;
+        }
+        #endregion
         #region private members
-        private string firstName;
-        private string lastName;
-        private int keyNumber;
-        private bool isJustOneEmployee;
-        private string idVisibityState = "Hidden";
+        
         private IKeyRepository _keyDataService;
         private IEmployeeRepository _employeeRepository;
         private IKeyInUseRepository _keyInUseReposiotory;
-        private ICommand giveKey;
-        KeyInUse keyInUse = new KeyInUse();
-        private NumberOfEmployessWithTheSameNameSurname CheckNumberOfEmployees()
-        {
-            var employees = _employeeRepository.GetAll();
-            IEnumerable<Employee> matchingEmployess = _employeeRepository.FindEmployeesWithTheSameNameAndSurname(employees, FirstName, LastName);
-            if (matchingEmployess.Count() == 0)
-            {
-                return NumberOfEmployessWithTheSameNameSurname.Zero;
-            }
-            else if (matchingEmployess.Count() == 1)
-            {
-                return NumberOfEmployessWithTheSameNameSurname.One;
-            }
-            return NumberOfEmployessWithTheSameNameSurname.MoreThanOne;
-        }
-        private bool IsDataCorrect()
-        {
-            if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName) && keyNumber != 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-        NumberOfEmployessWithTheSameNameSurname numberOfEmployees;
-        enum NumberOfEmployessWithTheSameNameSurname
-        {
-            Zero, One, MoreThanOne
-        }
+        private GiveKeyModelWrapper giveKeyModel = new GiveKeyModelWrapper(new GiveKeyModel());
         #endregion
         #region public properties
-        public string IdVisibityState
+        public GiveKeyModelWrapper GiveKeyModel
         {
-            get { return idVisibityState; }
-            set 
-            { 
-                idVisibityState = value;
+            get { return giveKeyModel; }
+            set { giveKeyModel = value;
                 OnPropertyChange();
             }
         }
-        public bool IsJustOneEmployee
-        {
-            get { return isJustOneEmployee; }
-            set 
-            { 
-                isJustOneEmployee = value;
-                OnPropertyChange();
-            }
-        }
-            
-        public bool EmployeeIsNotInDB { get; set; }
-        public string FirstName
-        {
-            get { return firstName; }
-            set { 
-                firstName = value;
-                OnPropertyChange();
-            }
-        }
-
-        public string LastName
-        {
-            get { return lastName; }
-            set { 
-                lastName = value;
-
-            }
-        }
-
-        public int KeyNumber
-        {
-            get { return keyNumber; }
-            set { 
-                keyNumber = value;
-
-            }
-        }
-        public bool IsMoreThanOneEmployeeWithSameNameAndSurname { get; set; }
+#endregion
+        #region comands
+        private ICommand giveKey;
         public ICommand GiveKey
         {
             get {
@@ -112,52 +50,74 @@ namespace Doorman.ViewModels
                          {
                              case NumberOfEmployessWithTheSameNameSurname.One:
                                  {
-                                     keyInUse.KeyId = keyNumber;
-                                     int EmployeeId = _employeeRepository.GetUserId(FirstName, LastName);
-                                     keyInUse.EmployeeId = EmployeeId;
-                                     _keyInUseReposiotory.Add(keyInUse);
+                                     int EmployeeId = _employeeRepository.GetUserId(GiveKeyModel.Model.FirstName, GiveKeyModel.Model.LastName);
+                                     _keyInUseReposiotory.Add(new KeyInUse() {EmployeeId=EmployeeId, KeyId=GiveKeyModel.KeyId });
                                      _keyInUseReposiotory.SaveAsync();
-                                     base.OnPropertyChange();
-
                                      OnPropertyChange();
                                      break;
                                  }
                              case NumberOfEmployessWithTheSameNameSurname.Zero:
                                  {
-                                     EmployeeIsNotInDB = true;
                                      OnPropertyChange();
                                      break;
                                  }
                              case NumberOfEmployessWithTheSameNameSurname.MoreThanOne:
                                  {
-                                     IsMoreThanOneEmployeeWithSameNameAndSurname = true;
                                      OnPropertyChange();
                                      MessageBox.Show("Jest co najmniej 2 pracowników o tym imieniu i nazwisku, muszisz wprowadzić ID pracownika","Uwaga");
-                                     IdVisibityState = "Visible";
                                      break;
                                  }
                          }
                          
-                         
                      },
                      (object o) =>
                      {
-                         return IsDataCorrect();
+                         return AreAllPropertiesFielled() && GiveKeyModel!=null && !GiveKeyModel.HasErrors;
                      });
                 return giveKey;
             }
-           
-        }
-#endregion
-        #region constructors
-        public GiveKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeRepository, IKeyInUseRepository keyInUseReposiotory)
-        {
-            _keyDataService = keyDataSerive;
-            _employeeRepository = employeeRepository;
-            _keyInUseReposiotory = keyInUseReposiotory;
         }
         #endregion
-        #region privatemethods
+        #region private methods
+        //private bool IsDataCorrect()
+        //{
+        //    if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName) && keyNumber != 0)
+        //    {
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
+        private NumberOfEmployessWithTheSameNameSurname CheckNumberOfEmployees()
+        {
+            var employees = _employeeRepository.GetAll();
+            IEnumerable<Employee> matchingEmployess = _employeeRepository.FindEmployeesWithTheSameNameAndSurname(employees,GiveKeyModel.Model. FirstName, GiveKeyModel.Model.LastName);
+            if (matchingEmployess.Count() == 0)
+            {
+                return NumberOfEmployessWithTheSameNameSurname.Zero;
+            }
+            else if (matchingEmployess.Count() == 1)
+            {
+                //matchingEmployess[0].
+                return NumberOfEmployessWithTheSameNameSurname.One;
+            }
+            return NumberOfEmployessWithTheSameNameSurname.MoreThanOne;
+        }
+
+        private bool AreAllPropertiesFielled()
+        {
+            if (GiveKeyModel.FirstName == null || GiveKeyModel.LastName == null ||GiveKeyModel.KeyId == null)
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
+        #region enums
+        enum NumberOfEmployessWithTheSameNameSurname
+        {
+            Zero, One, MoreThanOne
+        }
         #endregion
     }
 }
