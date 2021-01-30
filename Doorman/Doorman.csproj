@@ -123,6 +123,7 @@
       <DependentUpon>TakeKeyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IndexConverter.cs" />
+    <Compile Include="Wrappers\KeyWrapper.cs" />
     <Compile Include="Wrappers\EmployeeWrapper.cs" />
     <Compile Include="Wrappers\NotficationErrorBaseClass.cs" />
     <Page Include="MainWindow.xaml">
