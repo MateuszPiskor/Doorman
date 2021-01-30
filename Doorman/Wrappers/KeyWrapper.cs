@@ -6,13 +6,29 @@ namespace Doorman.Wrappers
 {
     public class KeyWrapper : NotficationErrorBaseClass 
     {
+        public Key Model { get; set; }
         public KeyWrapper(Key model)
         {
             Model=model;
         }
-        public Key Model { get; set; }
 
         public int Id { get { return Model.Id; } }
+
+
+        public int RoomNumber
+        {
+            get
+            {
+                return Model.RoomNumber;
+            }
+            set
+            {
+                Model.RoomNumber = value;
+                OnPropertyChange();
+                ValidateProperty(nameof(RoomNumber));
+            }
+        }
+       
 
         public string RoomName
         {
@@ -25,16 +41,22 @@ namespace Doorman.Wrappers
             }
         }
 
-        
+
         private void ValidateProperty(string propertyName)
         {
             ClearErrors(propertyName);
             switch (propertyName)
             {
+                case nameof(RoomNumber):
+                    if (RoomNumber < 0 || RoomNumber >9999)
+                    {
+                        AddError(propertyName, "Numer pokoju musi się zawierać w przedziale od 1 do 9999");
+                    }
+                    break;
                 case nameof(RoomName):
                     if (RoomName.Length < 2)
                     {
-                        AddError(propertyName, "Za krótka nazwa pokoju.");
+                        AddError(propertyName, "Za krótka nazwa pokoju");
                     }
                     else if (RoomName.Length > 50)
                     {

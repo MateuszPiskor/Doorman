@@ -1,4 +1,5 @@
 ﻿using Doorman.DataServices;
+using Doorman.Wrappers;
 using System.Windows.Input;
 
 namespace Doorman.ViewModels
@@ -6,11 +7,12 @@ namespace Doorman.ViewModels
     public class AddNewKeyViewModel : ViewModelBase, IAddNewKeyViewModel
     {
         #region private members
-        private Model.Key key = new Model.Key();
+
+        private KeyWrapper keyWrapper;
         private IKeyRepository _keyDataSerivce;
         private bool isKeyValid()
         {
-            if (key.RoomNumber != 0 && key.RoomName != "")
+            if (keyWrapper.RoomNumber != 0 && keyWrapper.RoomName != "")
             {
                 return true;
             }
@@ -19,30 +21,19 @@ namespace Doorman.ViewModels
         ICommand addKey;
         #endregion
         #region properties
-        public int RoomNumber
-        {
-            get
+        public KeyWrapper Key {
+            get 
             {
-                return key.RoomNumber;
+                return keyWrapper;
             }
-            set
+            set 
             {
-                key.RoomNumber = value;
-                OnPropertyChange(nameof(RoomNumber));
-            }
+                keyWrapper = value;
+                OnPropertyChange();
+
+            } 
         }
-        public string RoomName
-        {
-            get
-            {
-                return key.RoomName;
-            }
-            set
-            {
-                key.RoomName = value;
-                OnPropertyChange(nameof(RoomName));
-            }
-        }
+        
         public ICommand AddKey
         {
             get
@@ -52,7 +43,7 @@ namespace Doorman.ViewModels
                     addKey = new RelayCommand(
                        (object o) =>
                        {
-                           _keyDataSerivce.AddKey(key);
+                           _keyDataSerivce.AddKey(keyWrapper.Model);
                            base.OnPropertyChange();
                        },
                        (object o) =>
@@ -69,7 +60,7 @@ namespace Doorman.ViewModels
         public AddNewKeyViewModel(IKeyRepository keyDataService)
         {
             //Keys = new ObservableCollection<Key>();
-
+            keyWrapper = new KeyWrapper(new Model.Key());
             _keyDataSerivce = keyDataService;
         }
         #endregion
