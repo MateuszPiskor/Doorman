@@ -1,4 +1,7 @@
 ﻿using Doorman.Model;
+using Doorman.Wrappers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Doorman.DataServices
 {

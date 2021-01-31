@@ -22,6 +22,5 @@ namespace Doorman.DataServices
         {
             return _doormanDBContext.KeysInUse.SingleOrDefault(k=>k.KeyId == keyId);
         }
-
     }
 }
