@@ -4,21 +4,13 @@ using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    public class AddNewKeyViewModel : ViewModelBase, IAddNewKeyViewModel
+    public class AddNewKeyViewModel : NotficationErrorBaseClass, IAddNewKeyViewModel
     {
         #region private members
-
         private KeyWrapper keyWrapper;
         private IKeyRepository _keyDataSerivce;
-        private bool isKeyValid()
-        {
-            if (keyWrapper.RoomNumber != 0)
-            {
-                return true;
-            }
-            return false;
-        }
         ICommand addKey;
+
         #endregion
         #region properties
         public KeyWrapper Key {
@@ -33,7 +25,6 @@ namespace Doorman.ViewModels
 
             } 
         }
-        
         public ICommand AddKey
         {
             get
@@ -48,23 +39,31 @@ namespace Doorman.ViewModels
                        },
                        (object o) =>
                        {
-                           return isKeyValid();
+                           return IsFilled();
                        });
                 }
 
                 return addKey;
             }
         }
+
         #endregion
         #region costructors
         public AddNewKeyViewModel(IKeyRepository keyDataService)
         {
-            //Keys = new ObservableCollection<Key>();
             keyWrapper = new KeyWrapper(new Model.Key());
             _keyDataSerivce = keyDataService;
         }
         #endregion
         #region privatemethods
+        private bool IsFilled()
+        {
+            if (keyWrapper.RoomNumber != 0)
+            {
+                return true;
+            }
+            return false;
+        }
         #endregion
     }
 }
