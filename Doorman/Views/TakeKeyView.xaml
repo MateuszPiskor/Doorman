@@ -4,8 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Doorman.Views"
+             xmlns:converters="clr-namespace:Doorman.Helpers.Converters"
+             xmlns:vw="clr-namespace:Doorman.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:IntToString x:Key="intToString"></converters:IntToString>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,14 +25,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0"  Content="Imie" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="1" Text="{Binding FirstName,
-                Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        <TextBox Grid.Row="1" Text="{Binding TakeKeyModelWrapper.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        
         <Label Grid.Row="2"  Content="Nazwisko" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="3"   Text="{Binding LastName,
-                Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        <TextBox Grid.Row="3"   Text="{Binding TakeKeyModelWrapper.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        
         <Label Grid.Row="4"  Content="Numer klucza" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="5"  Text="{Binding KeyNumber,
-                Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        <TextBox Grid.Row="5"  Text="{Binding TakeKeyModelWrapper.KeyNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource intToString}}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        
         <StackPanel Grid.Row="8" Orientation="Horizontal">
             <Button  Content="Potwierd zdanie klucza" Command="{Binding TakeKey}" HorizontalAlignment="Left" Margin="10 0 10 10"></Button>
         </StackPanel>

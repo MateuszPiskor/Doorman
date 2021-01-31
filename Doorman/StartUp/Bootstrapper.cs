@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Doorman.DataServices;
+using Doorman.Model;
 using Doorman.ViewModels;
+using Doorman.Wrappers;
 using DoorMan.DataAccess;
 
 namespace Doorman.StartUp
@@ -15,6 +17,8 @@ namespace Doorman.StartUp
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<AddNewKeyViewModel>().AsSelf();
             builder.RegisterType<KeyRepository>().AsSelf();
+            builder.RegisterType<TakeKeyWrapper>().AsSelf();
+            builder.RegisterType<TakeKeyModel>().AsSelf();
 
             builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<KeyInUseRepository>().As<IKeyInUseRepository>();
@@ -26,6 +30,7 @@ namespace Doorman.StartUp
             builder.RegisterType<KeyRepository>().As<IKeyRepository>();
             builder.RegisterType<ListKeyInUseViewModel>().As<IListKeyInUseViewModel>();
             builder.RegisterType<RemoveKeyViewModel>().As<IRemoveKeyViewModel>();
+
 
             return builder.Build();
         }

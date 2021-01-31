@@ -1,49 +1,25 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
+using Doorman.Wrappers;
 using System.Windows.Input;
 
 namespace Doorman.ViewModels
 {
-    public class TakeKeyViewModel : ViewModelBase, ITakeKeyViewModel
+    public class TakeKeyViewModel : NotficationErrorBaseClass, ITakeKeyViewModel
     {
         #region private members
         private IEmployeeRepository _employeeDataService;
         private string firstName;
-        KeyInUse keyInUse = new KeyInUse();
         private IKeyRepository _keyDataService;
         private IKeyInUseRepository _keyInUseReposiotory;
         private int keyNumber;
         private string lastName;
         private ICommand takeKey;
+        KeyInUse keyInUse = new KeyInUse();
+
         #endregion
         #region properties
-        public string FirstName
-        {
-            get { return firstName; }
-            set
-            {
-                firstName = value;
-                OnPropertyChange();
-            }
-        }
-        public int KeyNumber
-        {
-            get { return keyNumber; }
-            set
-            {
-                keyNumber = value;
-
-            }
-        }
-        public string LastName
-        {
-            get { return lastName; }
-            set
-            {
-                lastName = value;
-
-            }
-        }
+        public TakeKeyWrapper TakeKeyModelWrapper { get; set; }
         public ICommand TakeKey
         {
             get
@@ -54,8 +30,8 @@ namespace Doorman.ViewModels
                      (object o) =>
                      {
                          //keyInUse.KeyId = keyNumber;
-                         int employeeId = _employeeDataService.GetUserId(FirstName, LastName);
-                         //keyInUse.EmployeeId = EmployeeId;
+                         int employeeId = _employeeDataService.GetUserId(TakeKeyModelWrapper.FirstName, TakeKeyModelWrapper.LastName);
+                         //keyInUse.EmployeeId = EmployeeId
                          keyInUse.Id = _keyInUseReposiotory.GetKeyinUseId(keyNumber, employeeId);
                          var keytoRemove = _keyInUseReposiotory.GetById(keyInUse.Id);
 
@@ -81,11 +57,12 @@ namespace Doorman.ViewModels
         }
         #endregion
         #region costructors
-        public TakeKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory)
+        public TakeKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeDataService, IKeyInUseRepository keyInUseReposiotory, TakeKeyWrapper takeKeyWrapper)
         {
             _keyDataService = keyDataSerive;
             _employeeDataService = employeeDataService;
             _keyInUseReposiotory = keyInUseReposiotory;
+            TakeKeyModelWrapper = takeKeyWrapper;
         }
         #endregion
         #region privatemethods
