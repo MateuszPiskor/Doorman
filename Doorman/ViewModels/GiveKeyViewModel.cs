@@ -1,11 +1,9 @@
 ﻿using Doorman.DataServices;
 using Doorman.Model;
 using Doorman.Wrappers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,96 +17,183 @@ namespace Doorman.ViewModels
             _keyDataService = keyDataSerive;
             _employeeRepository = employeeRepository;
             _keyInUseReposiotory = keyInUseReposiotory;
-            giveKeyModel = new GiveKeyModelWrapper(new GiveKeyModel());
+            giveKeyModelWrapper = new GiveKeyModelWrapper(new GiveKeyModel());
+            messageBoxList = new List<string>();
+
         }
         #endregion
         #region private members
 
+        private string messageBoxText;
         private IKeyRepository _keyDataService;
         private IEmployeeRepository _employeeRepository;
         private IKeyInUseRepository _keyInUseReposiotory;
-        private GiveKeyModelWrapper giveKeyModel;
+        private GiveKeyModelWrapper giveKeyModelWrapper;
+        private List<string> messageBoxList;
         #endregion
         #region public properties
         public GiveKeyModelWrapper GiveKeyModel
         {
-            get { return giveKeyModel; }
-            set { giveKeyModel = value;
+            get { return giveKeyModelWrapper; }
+            set
+            {
+                giveKeyModelWrapper = value;
                 OnPropertyChange();
             }
         }
         #endregion
         #region comands
         private ICommand giveKey;
+
         public ICommand GiveKey
         {
-            get {
-                if (giveKey == null) giveKey = new RelayCommand(
+            get
+            {
+                if (giveKey == null)
+                {
+                    giveKey = new RelayCommand(
                      (object o) =>
                      {
-                         var numberOfEmployee = CheckNumberOfEmployees();
-                         bool isKeyExist = _keyDataService.GetById(GiveKeyModel.KeyId) != null;
-                         bool isEmployeeExist = _employeeRepository.GetById(GiveKeyModel.EmployeeId) != null;
-                         if (numberOfEmployee == NumberOfEmployessWithTheSameNameSurname.MoreThanOne && GiveKeyModel.EmployeeId != 0)
+                         messageBoxList.Clear();
+                         bool keyExist = isKeyExist();
+                         if (!keyExist)
                          {
-                             if (!isEmployeeExist)
-                             {
-                                 MessageBox.Show("User o takim id nie istnieje. Popraw dane", "Uwaga");
-                             }
-                             GiveKeyModel.ShowEmployeeId = "Collapsed";
-                             GiveKeyModel.EmployeeId = 0;
-                             AddEmployee();
+                             KeyNoExistAction();
                          }
-                         else if (numberOfEmployee == NumberOfEmployessWithTheSameNameSurname.One)
+
+                         bool KeyIsNotInUse = IsKeyIsNotInUseState();
+                         if (!KeyIsNotInUse)
                          {
-                             GiveKeyModel.ShowEmployeeId = "Collapsed";
-                             AddEmployee();
+                             KeyIsNotInUseAction();
                          }
-                         else if (numberOfEmployee == NumberOfEmployessWithTheSameNameSurname.Zero)
+
+                         UniqueEmployees employees = GetUniqueEmployess();
+                         bool EmployeeMatch = IsEmployeMatch(employees);
+                         if (keyExist && KeyIsNotInUse && EmployeeMatch)
                          {
-                             GiveKeyModel.ShowEmployeeId = "Collapsed";
-                             OnPropertyChange();
+                             AddKeyInUse();
+                             messageBoxList.Add("Klucz został pomyślnie dodany do bazy danych");
+                             ShowAllMessage(messageBoxList);
+                             ClearForm();
                          }
-                         else if (numberOfEmployee == NumberOfEmployessWithTheSameNameSurname.MoreThanOne)
+                         else
                          {
-                             OnPropertyChange();
-                             MessageBox.Show("Jest co najmniej 2 pracowników o tym imieniu i nazwisku, muszisz wprowadzić ID pracownika", "Uwaga");
-                             GiveKeyModel.ShowEmployeeId = "Visible";
-                             OnPropertyChange();
+                             ShowAllMessage(messageBoxList);
                          }
-                         OnPropertyChange();
                      },
                      (object o) =>
                      {
                          return AreAllPropertiesFielled() && GiveKeyModel != null && !GiveKeyModel.HasErrors;
                      });
+                }
                 return giveKey;
             }
         }
 
-        private void AddEmployee()
+        private void KeyIsNotInUseAction()
+        {
+            messageBoxList.Add("Klucz o podanym id został już wydany. Sprawdz spis wydanych kluczy lub popraw dane\n");
+            GiveKeyModel.KeyId = 0;
+        }
+
+        private void KeyNoExistAction()
+        {
+            messageBoxList.Add("Klucz nie istnieje w bazie danych. Popraw jego numer lub wprowadz go do bazy.");
+            GiveKeyModel.KeyId = 0;
+        }
+
+        private void ShowAllMessage(List<string> messageBoxList)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < messageBoxList.Count; i++)
+            {
+                sb.Append($"{i + 1}. {messageBoxList[i]}\n");
+            }
+            if (sb.Length > 0)
+            {
+                MessageBox.Show(sb.ToString(), "Informacja");
+            }
+        }
+
+        #endregion
+        #region private methods
+        private void AddKeyInUse()
         {
             GiveKeyModel.ShowEmployeeId = "Collapsed";
-            int EmployeeId = _employeeRepository.GetUserId(GiveKeyModel.Model.FirstName, GiveKeyModel.Model.LastName);
+            int EmployeeId = _employeeRepository.GetUserId(GiveKeyModel.FirstName, GiveKeyModel.LastName);
             _keyInUseReposiotory.Add(new KeyInUse() { EmployeeId = EmployeeId, KeyId = GiveKeyModel.KeyId });
             _keyInUseReposiotory.SaveAsync();
             OnPropertyChange();
         }
-        #endregion
-        #region private methods
-        private NumberOfEmployessWithTheSameNameSurname CheckNumberOfEmployees()
+        private bool isKeyExist()
         {
-            var employees = _employeeRepository.GetAll();
-            IEnumerable<Employee> matchingEmployess = _employeeRepository.FindEmployeesWithTheSameNameAndSurname(employees, GiveKeyModel.FirstName, GiveKeyModel.LastName);
-            if (matchingEmployess.Count() == 0)
+            return _keyDataService.GetById(GiveKeyModel.KeyId) != null ? true : false;
+        }
+        private bool IsKeyIsNotInUseState()
+        {
+            return _keyInUseReposiotory.GetByKeyId(GiveKeyModel.KeyId) == null;
+        }
+
+        private bool IsEmployeMatch(UniqueEmployees employees)
+        {
+            switch (employees)
             {
-                return NumberOfEmployessWithTheSameNameSurname.Zero;
+                case (UniqueEmployees.Zero):
+                    {
+                        messageBoxList.Add("W bazie nie istnieje pracownik o tym imieniu i nazwisku. Popraw to.\n");
+                        ClearForm();
+                        return false;
+                    }
+                case (UniqueEmployees.One):
+                    return true;
+                case (UniqueEmployees.MoreThanOne):
+                    {
+                        if (GiveKeyModel.ShowEmployeeId == "Collapsed")
+                        {
+                            messageBoxList.Add("W bazie istnieje co najmniej dwoch pracownikow o tym imieniu i nazwisku --> Wprowadz id pracownika\n");
+                            GiveKeyModel.ShowEmployeeId = "Visible";
+                            GiveKeyModel.IsReadOnly = true;
+                            return false;
+                        }
+                        else if (GiveKeyModel.ShowEmployeeId == "Visible")
+                        {
+                            if (_employeeRepository.GetAll().SingleOrDefault(e => e.FirstName == GiveKeyModel.FirstName &&
+                             e.LastName == GiveKeyModel.LastName && e.Id == GiveKeyModel.EmployeeId) != null)
+                            {
+                                GiveKeyModel.IsReadOnly = false;
+                                return true;
+                            }
+                            else
+                            {
+                                messageBoxList.Add($"To id nie należy do użytkownika {GiveKeyModel.FirstName} {GiveKeyModel.LastName} -- >Popraw dane\n");
+                                return false;
+                            }
+                        }
+                    }
+                    break;
             }
-            else if (matchingEmployess.Count() == 1)
+            return true;
+        }
+
+        private void ClearForm()
+        {
+            GiveKeyModel.FirstName = "";
+            GiveKeyModel.LastName = "";
+            GiveKeyModel.KeyId = 0;
+        }
+
+        private UniqueEmployees GetUniqueEmployess()
+        {
+            IEnumerable<Employee> employees = _employeeRepository.GetAll().Where(e => e.FirstName == GiveKeyModel.FirstName && e.LastName == GiveKeyModel.LastName);
+            if (!employees.Any())
             {
-                return NumberOfEmployessWithTheSameNameSurname.One;
+                return UniqueEmployees.Zero;
             }
-            return NumberOfEmployessWithTheSameNameSurname.MoreThanOne;
+            else if (employees.Count() == 1)
+            {
+                return UniqueEmployees.One;
+            }
+            return UniqueEmployees.MoreThanOne;
         }
 
         private bool AreAllPropertiesFielled()
@@ -121,7 +206,7 @@ namespace Doorman.ViewModels
         }
         #endregion
         #region enums
-        enum NumberOfEmployessWithTheSameNameSurname
+        enum UniqueEmployees
         {
             Zero, One, MoreThanOne
         }

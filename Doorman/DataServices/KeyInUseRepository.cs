@@ -18,6 +18,10 @@ namespace Doorman.DataServices
             return _doormanDBContext.KeysInUse.Single(k => k.EmployeeId == employeeId && k.KeyId == keyId).Id;
         }
 
+        public KeyInUse GetByKeyId(int keyId)
+        {
+            return _doormanDBContext.KeysInUse.SingleOrDefault(k=>k.KeyId == keyId);
+        }
 
     }
 }

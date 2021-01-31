@@ -19,7 +19,8 @@ namespace Doorman.Wrappers
         private string lastName;
         private int employeeId;
         private int keyId;
-        private string showEmployeeId;
+        private string showEmployeeId = "Collapsed";
+        private bool isReadOnly;
 
 
         public string FirstName
@@ -63,6 +64,15 @@ namespace Doorman.Wrappers
                 showEmployeeId = value;
                 OnPropertyChange();
                 ValidateProperty(nameof(ShowEmployeeId));
+            }
+        }
+
+        public bool IsReadOnly {
+            get { return isReadOnly; }
+            set
+            {
+                isReadOnly = value;
+                OnPropertyChange();
             }
         }
 

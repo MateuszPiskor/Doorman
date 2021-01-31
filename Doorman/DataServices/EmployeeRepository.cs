@@ -15,11 +15,6 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
-        public IEnumerable<Employee> FindEmployeesWithTheSameNameAndSurname(IEnumerable<Employee> employees, string FirstName, string LastName)
-        {
-            return employees.Where(e => e.FirstName == FirstName && e.LastName == LastName).ToList();
-        }
-
         public IEnumerable<Employee> GetAll()
         {
             return doormanDBContext.Employees.ToList();
