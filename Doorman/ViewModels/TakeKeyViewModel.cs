@@ -31,7 +31,7 @@ namespace Doorman.ViewModels
                      {
                          messageBoxList.Clear();
                          bool keyExist = true;
-                         Model.Key Key = _keyRepository.GetIdByRoomNumber(TakeKeyModelWrapper.KeyNumber);
+                         Model.Key Key = _keyRepository.GetKeyByRoomNumber(TakeKeyModelWrapper.KeyNumber);
                          if (Key == null)
                          {
                              keyExist = false;

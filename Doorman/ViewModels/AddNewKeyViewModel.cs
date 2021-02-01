@@ -48,7 +48,7 @@ namespace Doorman.ViewModels
                        (object o) =>
                        {
                            messageBoxList.Clear();
-                           if (_keyRepository.GetIdByRoomNumber(keyWrapper.RoomNumber) == null)
+                           if (_keyRepository.GetKeyByRoomNumber(keyWrapper.RoomNumber) == null)
                            {
                                _keyRepository.Add(new Model.Key() { RoomName = KeyWrapper.RoomName, RoomNumber = KeyWrapper.RoomNumber });
                                _keyRepository.SaveAsync();
