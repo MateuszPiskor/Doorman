@@ -11,9 +11,18 @@ namespace Doorman.Wrappers
             Model=model;
         }
         public Employee Model { get; set; }
+        private string idAsAString;
 
-        public int Id { get { return Model.Id; } }
-
+        public string IdAsAString
+        {
+            get { return idAsAString; }
+            set
+            {
+                idAsAString = value;
+                OnPropertyChange();
+                ValidateProperty(nameof(IdAsAString));
+            }
+        }
         public string FirstName
         {
             get { return Model.FirstName; }
@@ -105,6 +114,12 @@ namespace Doorman.Wrappers
                         }
                         break;
                     }
+                case nameof(IdAsAString):
+                    if (!Regex.IsMatch(idAsAString, @"^[0-9]{4}$"))
+                    {
+                        AddError(propertyName, "Id pracownika musi się składać z 4 cyfr");
+                    }
+                    break;
             }
         }
     }
