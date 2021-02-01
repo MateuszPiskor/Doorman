@@ -4,6 +4,7 @@ namespace Doorman.DataServices
 {
     public interface IKeyRepository : IGenericRepository<Key>
     {
-        Key GetIdByRoomNumber(string roomNumber);
+        Key GetKeyByRoomNumber(string roomNumber);
+        string GetRoomNameByRoomNumber(string roomNumber);
     }
 }

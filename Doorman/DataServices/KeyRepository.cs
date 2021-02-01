@@ -18,9 +18,14 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
-        public Key GetIdByRoomNumber(string roomNumber)
+        public Key GetKeyByRoomNumber(string roomNumber)
         {
             return doormanDBContext.Keys.SingleOrDefault(k => k.RoomNumber == roomNumber);
+        }
+
+        public string GetRoomNameByRoomNumber(string roomNumber)
+        {
+            return doormanDBContext.Keys.SingleOrDefault(k => k.RoomNumber == roomNumber).RoomName;
         }
     }
 }

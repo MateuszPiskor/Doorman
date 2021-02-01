@@ -17,9 +17,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+           
         </Grid.RowDefinitions>
         <Label Grid.Row="0"  Content="Numer klucza" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="1" Margin="10 0 10 10" VerticalAlignment="Center" Text="{Binding Key.RoomNumber,Mode=TwoWay, Converter={StaticResource intToString} ,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Grid.Row="2"  Content="Szukaj klucza" Command="{Binding RemoveKey}" Focusable="True" HorizontalAlignment="Left" Margin="10 0 10 10"></Button>
+        <TextBox Grid.Row="1" Margin="10 0 10 10" VerticalAlignment="Center" Text="{Binding KeyRoom.RoomNumber,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <Label Grid.Row="2"  Content="Nazwa pomieszczenia" Margin="10 10 10 0" Visibility="{Binding RoomNameVisiblity, TargetNullValue='Collapsed'}"  VerticalAlignment="Bottom"></Label>
+        <TextBox Grid.Row="3" IsReadOnly="True" Visibility="{Binding RoomNameVisiblity, TargetNullValue='Collapsed'}"  Margin="10 0 10 10"  VerticalAlignment="Center" Text="{Binding KeyRoom.RoomName,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        
+        <Button Grid.Row="4"  Content="{Binding KeyText}" Command="{Binding RemoveKey}" Focusable="True" HorizontalAlignment="Left" Margin="10 0 10 10"></Button>
     </Grid>
 </UserControl>

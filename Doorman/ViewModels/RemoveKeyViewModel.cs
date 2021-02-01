@@ -1,5 +1,6 @@
 ﻿using Doorman.DataServices;
 using Doorman.Wrappers;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Doorman.ViewModels
@@ -9,16 +10,37 @@ namespace Doorman.ViewModels
         public RemoveKeyViewModel(IKeyRepository keyRepository)
         {
             _keyRepository = keyRepository;
-            Key = new KeyWrapper(new Model.Key());
+            KeyRoom = new KeyWrapper(new Model.Key());
         }
-        private KeyWrapper keyWrapper;
 
-        public KeyWrapper Key
+        private string roomNameVisiblity= "Collapsed";
+        private string keyText= "Szukaj klucza";
+
+        public string KeyText
         {
-            get { return keyWrapper; }
+            get { return keyText; }
+            set { keyText = value;
+                OnPropertyChange();
+            }
+        }
+
+        private KeyWrapper keyRoom;
+
+        public string RoomNameVisiblity
+        {
+            get { return roomNameVisiblity; }
+            set { roomNameVisiblity = value;
+                OnPropertyChange();
+            }
+        }
+
+
+        public KeyWrapper KeyRoom
+        {
+            get { return keyRoom; }
             set
             {
-                keyWrapper = value;
+                keyRoom = value;
                 OnPropertyChange();
             }
         }
@@ -35,12 +57,33 @@ namespace Doorman.ViewModels
                     removeKey = new RelayCommand(
                        (object o) =>
                        {
-                           Model.Key keyFound = _keyRepository.GetById(Key.Id);
-                           base.OnPropertyChange();
+                           Model.Key Key =_keyRepository.GetKeyByRoomNumber(KeyRoom.RoomNumber);
+                           bool keyExist = Key != null;
+                           
+                           if (keyExist && RoomNameVisiblity== "Collapsed")
+                           {
+                               RoomNameVisiblity = "Visible";
+                               KeyRoom.RoomName = _keyRepository.GetRoomNameByRoomNumber(KeyRoom.RoomNumber);
+                               KeyText = "Usuń klucz"; 
+                               keyExist = true;
+                           }
+                           else if(keyExist && RoomNameVisiblity== "Visible")
+                           {
+                               _keyRepository.Remove(Key);
+                               MessageBox.Show("Klucz został usunięty");
+                               KeyRoom.RoomNumber = "";
+                               RoomNameVisiblity = "Collapsed";
+                               KeyText = "Szukaj klucza";
+                           }
+                           else
+                           {
+                               MessageBox.Show("Klucz nie istnieje w bazie. Proszę popraw jego numer","Informacja");
+                               KeyRoom.RoomNumber = "";
+                           }
                        },
                        (object o) =>
                        {
-                           return Key != null && !Key.HasErrors;
+                           return KeyRoom != null && !KeyRoom.HasErrors;
                        });
                 }
 
