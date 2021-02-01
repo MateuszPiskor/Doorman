@@ -25,5 +25,10 @@ namespace Doorman.DataServices
             keys.Add(keyEntity);
             doormanDBContext.SaveChanges();
         }
+
+        public Key GetIdByRoomNumber(string roomNumber)
+        {
+            return doormanDBContext.Keys.SingleOrDefault(k => k.RoomNumber == roomNumber);
+        }
     }
 }
