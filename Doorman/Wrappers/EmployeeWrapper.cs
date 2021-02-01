@@ -83,9 +83,9 @@ namespace Doorman.Wrappers
                         {
                             AddError(propertyName, "Nazwisko za krótkie.");
                         }
-                        else if (!LastName.All(char.IsLetter))
+                        else if (!Regex.IsMatch(LastName, @"^[a-zA-Z\-`śćźżąęół]*$"))
                         {
-                            AddError(propertyName, "Nazwisko nie może zawierać cyfr");
+                            AddError(propertyName, "Nie poprawany format nazwiska");
                         }
                         break;
                     }

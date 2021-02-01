@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0"  Content="Id pracownika" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
+        <Label Grid.Row="0"  Content="Id nowego pracownika" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
         <TextBlock Grid.Row="1" Text="{Binding InitialId, Mode=TwoWay}" Margin="10 0 10 10" VerticalAlignment="Center" ></TextBlock>
         
         <Label Grid.Row="2"  Content="Imie" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>

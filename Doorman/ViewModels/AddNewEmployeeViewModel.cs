@@ -2,6 +2,7 @@
 using Doorman.Helpers;
 using Doorman.Model;
 using Doorman.Wrappers;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Doorman.ViewModels
@@ -12,7 +13,6 @@ namespace Doorman.ViewModels
         private EmployeeWrapper _employee = new EmployeeWrapper(new Employee());
         private IEmployeeRepository _employeeRepository;
         private string initialId;
-        private bool isModelCorrect;
         ICommand addEmployee;
         #endregion
         #region properties
@@ -34,11 +34,6 @@ namespace Doorman.ViewModels
                 OnPropertyChange();
             }
         }
-        public bool IsModelCorrect
-        {
-            get { return isModelCorrect; }
-            set { isModelCorrect = value; }
-        }
         public ICommand AddEmployee
         {
             get
@@ -49,8 +44,10 @@ namespace Doorman.ViewModels
                        (object o) =>
                        {
                            _employeeRepository.Add(_employee.Model);
-
                            _employeeRepository.SaveAsync();
+                           MessageBox.Show($"Pracownik {_employee.FirstName} {_employee.LastName} został pomyślnie dodany do bazy\nJego id to {InitialId}");
+                           ClearFormValues();
+                           setInitialEmployeId();
                            OnPropertyChange();
                        },
                        (object o) =>
@@ -62,15 +59,15 @@ namespace Doorman.ViewModels
                 return addEmployee;
             }
         }
+
         #endregion
         #region costructors
         public AddNewEmployeeViewModel(IEmployeeRepository employeeDataService)
         {
             _employeeRepository = employeeDataService;
-            int id = _employeeRepository.GetLastEntity() == null ? 0 : _employeeRepository.GetLastEntity().Id;
-            InitialId = id.InitialNextIdWithZeros();
-
+            setInitialEmployeId();
         }
+
         #endregion
         #region privatemethods
         private bool AreAllPropertiesFielled()
@@ -81,6 +78,19 @@ namespace Doorman.ViewModels
                 return false;
             }
             return true;
+        }
+
+        private void ClearFormValues()
+        {
+            _employee.Department = "";
+            _employee.FirstName = "";
+            _employee.LastName = "";
+            _employee.Position = "";
+        }
+        private void setInitialEmployeId()
+        {
+            int id = _employeeRepository.GetLastEntity() == null ? 0 : _employeeRepository.GetLastEntity().Id;
+            InitialId = id.InitialNextIdWithZeros();
         }
         #endregion
     }
