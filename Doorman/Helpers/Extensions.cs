@@ -1,6 +1,6 @@
 ﻿namespace Doorman.Helpers
 {
-    public static class IntExtensions
+    public static class Extensions
     {
         public static string InitialNextIdWithZeros(this int number)
         {
@@ -17,5 +17,6 @@
             }
             return IdWithInitialZeros;
         }
+
     }
 }

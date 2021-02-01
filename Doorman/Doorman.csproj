@@ -89,7 +89,7 @@
     <Compile Include="DataServices\KeyRepository.cs" />
     <Compile Include="DataServices\KeyInUseRepository.cs" />
     <Compile Include="Helpers\Converters\IntToString.cs" />
-    <Compile Include="Helpers\IntExtensions.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
     <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
