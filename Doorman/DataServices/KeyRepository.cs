@@ -18,14 +18,6 @@ namespace Doorman.DataServices
             this.doormanDBContext = doormanDBContext;
         }
 
-        public void AddKey(Key key)
-        {
-            var keys = doormanDBContext.Set<Key>();
-            var keyEntity = new Key() { RoomName = key.RoomName, RoomNumber = key.RoomNumber }; 
-            keys.Add(keyEntity);
-            doormanDBContext.SaveChanges();
-        }
-
         public Key GetIdByRoomNumber(string roomNumber)
         {
             return doormanDBContext.Keys.SingleOrDefault(k => k.RoomNumber == roomNumber);

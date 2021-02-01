@@ -1,11 +1,12 @@
 ﻿using Doorman.Model;
+using System.Text.RegularExpressions;
 
 namespace Doorman.Wrappers
 {
     public class KeyWrapper : NotficationErrorBaseClass
     {
         private string roomName;
-        private int roomNumber;
+        private string roomNumber;
         private int id;
 
         public int Id
@@ -37,7 +38,7 @@ namespace Doorman.Wrappers
                 ValidateProperty(nameof(RoomName));
             }
         }
-        public int RoomNumber
+        public string RoomNumber
         {
             get
             {
@@ -59,9 +60,9 @@ namespace Doorman.Wrappers
             switch (propertyName)
             {
                 case nameof(RoomNumber):
-                    if (RoomNumber <= 0 || RoomNumber > 9999)
+                    if (!Regex.IsMatch(roomNumber, @"^[0-9]{4}$"))
                     {
-                        AddError(propertyName, "Numer pokoju musi się zawierać w przedziale od 1 do 9999");
+                        AddError(propertyName, "Numer pokoju musi składa się z 4 cyfr");
                     }
                     break;
                 case nameof(RoomName):
