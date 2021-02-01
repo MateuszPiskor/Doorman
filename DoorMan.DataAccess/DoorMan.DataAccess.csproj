@@ -53,6 +53,14 @@
     <Compile Include="Migrations\202101301608445_IntialDatabase.Designer.cs">
       <DependentUpon>202101301608445_IntialDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102010858281_ChangeKeyNumberToAString.cs" />
+    <Compile Include="Migrations\202102010858281_ChangeKeyNumberToAString.Designer.cs">
+      <DependentUpon>202102010858281_ChangeKeyNumberToAString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102011013292_AddUniqueAtribute.cs" />
+    <Compile Include="Migrations\202102011013292_AddUniqueAtribute.Designer.cs">
+      <DependentUpon>202102011013292_AddUniqueAtribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +77,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101301608445_IntialDatabase.resx">
       <DependentUpon>202101301608445_IntialDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102010858281_ChangeKeyNumberToAString.resx">
+      <DependentUpon>202102010858281_ChangeKeyNumberToAString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102011013292_AddUniqueAtribute.resx">
+      <DependentUpon>202102011013292_AddUniqueAtribute.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

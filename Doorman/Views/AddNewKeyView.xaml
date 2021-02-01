@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0"  Content="Numer klucza" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="1" Margin="10 0 10 10" VerticalAlignment="Center" Text="{Binding Key.RoomNumber,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource intToString}}"></TextBox>  
+        <TextBox Grid.Row="1" Margin="10 0 10 10" VerticalAlignment="Center" Text="{Binding Key.RoomNumber,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>  
         
         <Label Grid.Row="2"  Content="Nazwa pokoju" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
         <TextBox Grid.Row="3" Margin="10 0 10 10" VerticalAlignment="Center"  Text="{Binding Key.RoomName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>

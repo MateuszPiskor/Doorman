@@ -30,7 +30,7 @@
         <TextBox Grid.Row="3" IsReadOnly = "{Binding GiveKeyModel.IsReadOnly }"  Text="{Binding GiveKeyModel.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
         
         <Label Grid.Row="4"  Content="Numer klucza" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
-        <TextBox Grid.Row="5" Text="{Binding GiveKeyModel.KeyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource intToString}}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        <TextBox Grid.Row="5" Text="{Binding GiveKeyModel.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
 
         <Label Grid.Row="6" Visibility="{Binding GiveKeyModel.ShowEmployeeId, TargetNullValue='Collapsed'}"  Content="Podaj ID Pracownika" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
         <TextBox Grid.Row="7"  Visibility="{Binding GiveKeyModel.ShowEmployeeId, TargetNullValue='Collapsed'}" Text="{Binding GiveKeyModel.EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource intToString}}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>

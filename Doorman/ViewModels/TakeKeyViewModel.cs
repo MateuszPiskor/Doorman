@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using Key = Doorman.Model.Key;
 
 namespace Doorman.ViewModels
 {
@@ -12,6 +13,7 @@ namespace Doorman.ViewModels
     {
         #region private members
         private IKeyInUseRepository _keyInUseReposiotory;
+        private IKeyRepository _keyRepository;
         private ICommand takeKey;
         private List<string> messageBoxList;
 
@@ -28,24 +30,32 @@ namespace Doorman.ViewModels
                      (object o) =>
                      {
                          messageBoxList.Clear();
-                         KeyInUse keyInUse = _keyInUseReposiotory.GetByKeyId(TakeKeyModelWrapper.KeyNumber);
-                         bool keyExist = keyInUse != null;
+                         bool keyExist = true;
+                         Model.Key Key = _keyRepository.GetIdByRoomNumber(TakeKeyModelWrapper.KeyNumber);
+                         if (Key == null)
+                         {
+                             keyExist = false;
+                         }
+
+                         KeyInUse keyInUse = _keyInUseReposiotory.GetByKeyId(Key.Id);
+
+                         bool keyInUsing = keyInUse != null;
                          bool keyBelongsToThisEmployee = false;
 
-                         if (!keyExist)
+                         if (!keyInUsing)
                          {
                              messageBoxList.Add("Nikt nie pobierał klucza o tym numerze.");
-                             TakeKeyModelWrapper.KeyNumber = 0;
+                             TakeKeyModelWrapper.KeyNumber = "";
                          }
                          else
                          {
                              keyBelongsToThisEmployee = isKeyBelongsToThisEmploye(keyInUse);
                              messageBoxList.Add($"Nie możesz zdać tego klucza\nKlucz ten został porzyczony przez {keyInUse.Employee.FirstName},{keyInUse.Employee.LastName}, {keyInUse.Employee.Department}\nMusi zostać zdany przez tą osobę"
                                  );
-                             TakeKeyModelWrapper.KeyNumber = 0;
+                             TakeKeyModelWrapper.KeyNumber = "";
                          }
 
-                         if (keyExist && keyBelongsToThisEmployee)
+                         if (keyExist && keyInUsing && keyBelongsToThisEmployee)
                          {
                              _keyInUseReposiotory.Remove(keyInUse);
                              MessageBox.Show("Klucz został usniety z bazy", "Informacja");
@@ -68,9 +78,10 @@ namespace Doorman.ViewModels
 
         #endregion
         #region costructors
-        public TakeKeyViewModel(IKeyInUseRepository keyInUseReposiotory, TakeKeyWrapper takeKeyWrapper)
+        public TakeKeyViewModel(IKeyInUseRepository keyInUseReposiotory, TakeKeyWrapper takeKeyWrapper, IKeyRepository keyRepository)
         {
             _keyInUseReposiotory = keyInUseReposiotory;
+            _keyRepository = keyRepository;
             TakeKeyModelWrapper = takeKeyWrapper;
             messageBoxList = new List<string>();
         }
@@ -80,11 +91,11 @@ namespace Doorman.ViewModels
         {
             TakeKeyModelWrapper.FirstName = "";
             TakeKeyModelWrapper.LastName = "";
-            TakeKeyModelWrapper.KeyNumber = 0;
+            TakeKeyModelWrapper.KeyNumber = "";
         }
         private bool IsDataCorrect()
         {
-            if (!string.IsNullOrEmpty(TakeKeyModelWrapper.FirstName) && !string.IsNullOrEmpty(TakeKeyModelWrapper.LastName) && TakeKeyModelWrapper.KeyNumber != 0)
+            if (!string.IsNullOrEmpty(TakeKeyModelWrapper.FirstName) && !string.IsNullOrEmpty(TakeKeyModelWrapper.LastName) && TakeKeyModelWrapper.KeyNumber != "")
             {
                 return true;
             }

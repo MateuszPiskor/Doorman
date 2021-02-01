@@ -1,13 +1,10 @@
 ﻿using Doorman.Model;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Doorman.Wrappers
 {
-    public class GiveKeyModelWrapper:NotficationErrorBaseClass
+    public class GiveKeyModelWrapper : NotficationErrorBaseClass
     {
         public GiveKeyModel Model;
         public GiveKeyModelWrapper(GiveKeyModel model)
@@ -18,41 +15,51 @@ namespace Doorman.Wrappers
         private string firstName;
         private string lastName;
         private int employeeId;
-        private int keyId;
+        private string roomNumber;
         private string showEmployeeId = "Collapsed";
         private bool isReadOnly;
-
 
         public string FirstName
         {
             get { return firstName; }
-            set { firstName = value;
+            set
+            {
+                firstName = value;
                 OnPropertyChange();
                 ValidateProperty(nameof(FirstName));
             }
         }
+
         public string LastName
         {
             get { return lastName; }
-            set { lastName = value;
+            set
+            {
+                lastName = value;
                 OnPropertyChange();
-               ValidateProperty(nameof(LastName));
+                ValidateProperty(nameof(LastName));
             }
         }
+
         public int EmployeeId
         {
             get { return employeeId; }
-            set { employeeId = value;
+            set
+            {
+                employeeId = value;
                 OnPropertyChange();
                 ValidateProperty(nameof(EmployeeId));
             }
         }
-        public int KeyId
+
+        public string RoomNumber
         {
-            get { return keyId; }
-            set { keyId = value;
+            get { return roomNumber; }
+            set
+            {
+                roomNumber = value;
                 OnPropertyChange();
-                ValidateProperty(nameof(KeyId));
+                ValidateProperty(nameof(RoomNumber));
             }
         }
 
@@ -67,7 +74,8 @@ namespace Doorman.Wrappers
             }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return isReadOnly; }
             set
             {
@@ -108,10 +116,10 @@ namespace Doorman.Wrappers
                         }
                         break;
                     }
-                case nameof(KeyId):
-                    if (KeyId <= 0 || KeyId > 9999)
+                case nameof(RoomNumber):
+                    if (!Regex.IsMatch(roomNumber, @"^[0-9]{4}$"))
                     {
-                        AddError(propertyName, "Numer klucza musi się zawierać w przedziale od 1 do 9999");
+                        AddError(propertyName, "Numer pokoju musi składa się z 4 cyfr");
                     }
                     break;
                 case nameof(EmployeeId):
@@ -122,7 +130,5 @@ namespace Doorman.Wrappers
                     break;
             }
         }
-
-
     }
 }

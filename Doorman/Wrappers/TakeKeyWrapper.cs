@@ -1,21 +1,29 @@
 ﻿using Doorman.Model;
-using Doorman.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Doorman.Wrappers
 {
-    public class TakeKeyWrapper: NotficationErrorBaseClass
+    public class TakeKeyWrapper : NotficationErrorBaseClass
     {
-        private string firstName;
-        private string lastName;
-        private int keyNumber;
         public TakeKeyWrapper(TakeKeyModel model)
         {
             Model = model;
+        }
+        private int id;
+        private string firstName;
+        private string lastName;
+        private string keyNumber;
+        
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChange();
+                ValidateProperty(nameof(Id));
+            }
         }
         public string FirstName
         {
@@ -27,7 +35,7 @@ namespace Doorman.Wrappers
                 ValidateProperty(nameof(FirstName));
             }
         }
-        public int KeyNumber
+        public string KeyNumber
         {
             get { return keyNumber; }
             set
@@ -45,7 +53,6 @@ namespace Doorman.Wrappers
                 ValidateProperty(nameof(LastName));
             }
         }
-
         public TakeKeyModel Model { get; }
 
         private void ValidateProperty(string propertyName)
@@ -81,9 +88,9 @@ namespace Doorman.Wrappers
                         break;
                     }
                 case nameof(KeyNumber):
-                    if (KeyNumber <= 0 || KeyNumber > 9999)
+                    if (!Regex.IsMatch(keyNumber, @"^[0-9]{4}$"))
                     {
-                        AddError(propertyName, "Numer klucza musi się zawierać w przedziale od 1 do 9999");
+                        AddError(propertyName, "Numer pokoju musi składa się z 4 cyfr");
                     }
                     break;
             }

@@ -12,22 +12,21 @@ namespace Doorman.ViewModels
     public class GiveKeyViewModel : NotficationErrorBaseClass, IGiveKeyViewModel
     {
         #region constructors
-        public GiveKeyViewModel(IKeyRepository keyDataSerive, IEmployeeRepository employeeRepository, IKeyInUseRepository keyInUseReposiotory)
+        public GiveKeyViewModel(IEmployeeRepository employeeRepository, IKeyInUseRepository keyInUseReposiotory, IKeyRepository keyRepository)
         {
-            _keyDataService = keyDataSerive;
             _employeeRepository = employeeRepository;
             _keyInUseReposiotory = keyInUseReposiotory;
+            _keyRepository = keyRepository;
             giveKeyModelWrapper = new GiveKeyModelWrapper(new GiveKeyModel());
             messageBoxList = new List<string>();
-
         }
         #endregion
         #region private members
 
         private string messageBoxText;
-        private IKeyRepository _keyDataService;
         private IEmployeeRepository _employeeRepository;
         private IKeyInUseRepository _keyInUseReposiotory;
+        private IKeyRepository _keyRepository;
         private GiveKeyModelWrapper giveKeyModelWrapper;
         private List<string> messageBoxList;
         #endregion
@@ -42,7 +41,7 @@ namespace Doorman.ViewModels
             }
         }
         #endregion
-        #region comands
+        #region commands
         private ICommand giveKey;
 
         public ICommand GiveKey
@@ -55,23 +54,30 @@ namespace Doorman.ViewModels
                      (object o) =>
                      {
                          messageBoxList.Clear();
-                         bool keyExist = isKeyExist();
-                         if (!keyExist)
+                         bool keyExist = true; ;
+                         Model.Key Key = _keyRepository.GetIdByRoomNumber(GiveKeyModel.RoomNumber);
+                         if (Key == null)
                          {
+                             keyExist = false;
                              KeyNoExistAction();
                          }
 
-                         bool KeyIsNotInUse = IsKeyIsNotInUseState();
-                         if (!KeyIsNotInUse)
+                         bool KeyIsNotInUse = false;
+
+                         if (keyExist)
                          {
-                             KeyIsNotInUseAction();
+                             KeyIsNotInUse = _keyInUseReposiotory.GetByKeyId(Key.Id) == null;
+                             if (!KeyIsNotInUse)
+                             {
+                                 KeyIsNotInUseAction();
+                             }
                          }
 
                          UniqueEmployees employees = GetUniqueEmployess();
                          bool EmployeeMatch = IsEmployeMatch(employees);
                          if (keyExist && KeyIsNotInUse && EmployeeMatch)
                          {
-                             AddKeyInUse();
+                             AddKeyInUse(Key);
                              messageBoxList.Add("Klucz został pomyślnie dodany do bazy danych");
                              ShowAllMessage(messageBoxList);
                              ClearForm();
@@ -93,13 +99,13 @@ namespace Doorman.ViewModels
         private void KeyIsNotInUseAction()
         {
             messageBoxList.Add("Klucz o podanym id został już wydany. Sprawdz spis wydanych kluczy lub popraw dane\n");
-            GiveKeyModel.KeyId = 0;
+            GiveKeyModel.RoomNumber = "";
         }
 
         private void KeyNoExistAction()
         {
             messageBoxList.Add("Klucz nie istnieje w bazie danych. Popraw jego numer lub wprowadz go do bazy.");
-            GiveKeyModel.KeyId = 0;
+            GiveKeyModel.RoomNumber = "";
         }
 
         private void ShowAllMessage(List<string> messageBoxList)
@@ -117,21 +123,13 @@ namespace Doorman.ViewModels
 
         #endregion
         #region private methods
-        private void AddKeyInUse()
+        private void AddKeyInUse(Model.Key key)
         {
             GiveKeyModel.ShowEmployeeId = "Collapsed";
             int EmployeeId = _employeeRepository.GetUserId(GiveKeyModel.FirstName, GiveKeyModel.LastName);
-            _keyInUseReposiotory.Add(new KeyInUse() { EmployeeId = EmployeeId, KeyId = GiveKeyModel.KeyId });
+            _keyInUseReposiotory.Add(new KeyInUse() { EmployeeId = EmployeeId, KeyId = key.Id });
             _keyInUseReposiotory.SaveAsync();
             OnPropertyChange();
-        }
-        private bool isKeyExist()
-        {
-            return _keyDataService.GetById(GiveKeyModel.KeyId) != null ? true : false;
-        }
-        private bool IsKeyIsNotInUseState()
-        {
-            return _keyInUseReposiotory.GetByKeyId(GiveKeyModel.KeyId) == null;
         }
 
         private bool IsEmployeMatch(UniqueEmployees employees)
@@ -179,7 +177,7 @@ namespace Doorman.ViewModels
         {
             GiveKeyModel.FirstName = "";
             GiveKeyModel.LastName = "";
-            GiveKeyModel.KeyId = 0;
+            GiveKeyModel.RoomNumber = "";
         }
 
         private UniqueEmployees GetUniqueEmployess()
@@ -198,7 +196,7 @@ namespace Doorman.ViewModels
 
         private bool AreAllPropertiesFielled()
         {
-            if ((GiveKeyModel.FirstName == null || GiveKeyModel.LastName == null || GiveKeyModel.KeyId == 0))
+            if ((GiveKeyModel.FirstName == null || GiveKeyModel.LastName == null || GiveKeyModel.RoomNumber == ""))
             {
                 return false;
             }

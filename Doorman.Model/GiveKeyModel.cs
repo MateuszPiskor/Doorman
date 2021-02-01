@@ -9,6 +9,7 @@ namespace Doorman.Model
     public class GiveKeyModel
     {
         public string FirstName { get; set; }
+        public string RoomNumber { get; set; }
         public string LastName { get; set; }
         public string EmployeeId { get; set; }
         public int KeyId { get; set; }
