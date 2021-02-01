@@ -1,5 +1,9 @@
 ﻿
+using Autofac;
+using Doorman.DataServices;
+using Doorman.StartUp;
 using Doorman.ViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,31 +21,81 @@ using System.Windows.Shapes;
 
 namespace Doorman
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
-        private AddNewKeyViewModel addNewKeyViewModel;
+        private IContainer _conteiner;
+        private IAddNewEmployeeViewModel _addNewEmployeeViewModel;
+        private IAddNewKeyViewModel _addNewKeyViewModel;
+        private IGiveKeyViewModel _getKeyViewModel;
+        private ITakeKeyViewModel _takeKeyViewModel;
+        private IListKeyInUseViewModel _listKeyViewModel;
+        private IEditKeyViewModel _editKeyViewModel;
+        private IRemoveKeyViewModel _removeKeyViewModel;
+        private IRemoveEmployeeViewModel _removeEmployeeViewModel;
 
-        public MainWindow(AddNewKeyViewModel addNewKeyViewModel)
+        public MainWindow(/*KeyDataService keyDataService,IEmployeeDataService employeeDataService,*/ IAddNewEmployeeViewModel addNewEmployeeViewModel, IAddNewKeyViewModel addNewKeyViewModel, IGiveKeyViewModel getKeyViewModel, ITakeKeyViewModel takeKeyViewModel, IListKeyInUseViewModel listKeyViewModel, IEditKeyViewModel editKeyViewModel, IRemoveKeyViewModel removeKeyViewModel, IRemoveEmployeeViewModel removeEmployeeViewModel)
         {
-            this.addNewKeyViewModel = addNewKeyViewModel;
+             _conteiner= new Bootstrapper().Bootstarp();
+            _addNewEmployeeViewModel = addNewEmployeeViewModel;
+            _addNewKeyViewModel = addNewKeyViewModel;
+            _getKeyViewModel = getKeyViewModel;
+            _takeKeyViewModel = takeKeyViewModel;
+            _listKeyViewModel = listKeyViewModel;
+            _editKeyViewModel = editKeyViewModel;
+            _removeKeyViewModel = removeKeyViewModel;
+            _removeEmployeeViewModel = removeEmployeeViewModel;
             InitializeComponent();
         }
-        public MainWindow()
-        {
 
-        }
-
-        private void GetKey_Clicked(object sender, RoutedEventArgs e)
+        private void AddEmployee_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new GetKeyViewModel();
+            using (var scope = _conteiner.BeginLifetimeScope())
+            {
+                var addNewEmployeeViewModel = scope.Resolve<IAddNewEmployeeViewModel>();
+                DataContext = addNewEmployeeViewModel;
+            }
         }
 
         private void AddNewKey_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = addNewKeyViewModel;
+            DataContext = _addNewKeyViewModel;
         }
+
+        private void GetKeyViewModel_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = _getKeyViewModel;
+        }
+
+        private void TakeKey_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = _takeKeyViewModel;
+        }
+
+        private void ListKeysInUse_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = _listKeyViewModel;
+        }
+
+        private void EditKey_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = _editKeyViewModel;
+        }
+
+
+        private void RemoveKey_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = _removeKeyViewModel;
+        }
+
+        private void RemoveEmployee_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = _removeEmployeeViewModel;
+        }
+
+
+        //private void GetKeyViewModel_Clicker(object sender, RoutedEventArgs e)
+        //{
+        //    DataContext = _getNewKeyViewModel;
+        //}
     }
 }

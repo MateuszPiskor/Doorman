@@ -38,8 +38,30 @@
     <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.4.0\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="JacekMatulewski.WpfUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JacekMatulewski.WpfUtils.1.0.3\lib\net45\JacekMatulewski.WpfUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.4.3\lib\net46\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,18 +80,66 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataServices\IKeyDataService.cs" />
-    <Compile Include="DataServices\KeyDataService.cs" />
+    <Compile Include="DataServices\EmployeeRepository.cs" />
+    <Compile Include="DataServices\GenericRepository.cs" />
+    <Compile Include="DataServices\IEmployeeRepository.cs" />
+    <Compile Include="DataServices\IGenericRepository.cs" />
+    <Compile Include="DataServices\IKeyRepository.cs" />
+    <Compile Include="DataServices\IKeyInUseRepository.cs" />
+    <Compile Include="DataServices\KeyRepository.cs" />
+    <Compile Include="DataServices\KeyInUseRepository.cs" />
+    <Compile Include="Helpers\Converters\IntToString.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="StartUp\Bootstrapper.cs" />
+    <Compile Include="ViewModels\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddNewKeyViewModel.cs" />
+    <Compile Include="ViewModels\EditKeyViewModel.cs" />
+    <Compile Include="ViewModels\IAddNewEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\IAddNewKeyViewModel.cs" />
+    <Compile Include="ViewModels\IEditKeyViewModel.cs" />
+    <Compile Include="ViewModels\IGiveKeyViewModel.cs" />
+    <Compile Include="ViewModels\IListKeyInUseViewModel.cs" />
+    <Compile Include="ViewModels\Interface1.cs" />
+    <Compile Include="ViewModels\IRemoveKeyViewModel.cs" />
+    <Compile Include="ViewModels\ITakeKeyViewModel.cs" />
+    <Compile Include="ViewModels\ListKeyInUseViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\RemoveEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\RemoveKeyViewModel.cs" />
+    <Compile Include="ViewModels\TakeKeyViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\GetKeyViewModel.cs" />
+    <Compile Include="ViewModels\GiveKeyViewModel.cs" />
+    <Compile Include="Views\AddNewEmployeeView.xaml.cs">
+      <DependentUpon>AddNewEmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddNewKeyView.xaml.cs">
       <DependentUpon>AddNewKeyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GetKeyView.xaml.cs">
-      <DependentUpon>GetKeyView.xaml</DependentUpon>
+    <Compile Include="Views\EditKeyView.xaml.cs">
+      <DependentUpon>EditKeyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GiveKeyView.xaml.cs">
+      <DependentUpon>GiveKeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListKeyInUseView.xaml.cs">
+      <DependentUpon>ListKeyInUseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemoveEmployeeView.xaml.cs">
+      <DependentUpon>RemoveEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemoveKeyView.xaml.cs">
+      <DependentUpon>RemoveKeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TakeKeyView.xaml.cs">
+      <DependentUpon>TakeKeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IndexConverter.cs" />
+    <Compile Include="Wrappers\EmployeeWrapper.cs" />
+    <Compile Include="Wrappers\GiveKeyModelWrapper.cs" />
+    <Compile Include="Wrappers\KeyEditModelWrapper.cs" />
+    <Compile Include="Wrappers\KeyWrapper.cs" />
+    <Compile Include="Wrappers\NotficationErrorBaseClass.cs" />
+    <Compile Include="Wrappers\TakeKeyWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,11 +152,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddNewEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddNewKeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GetKeyView.xaml">
+    <Page Include="Views\EditKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GiveKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListKeyInUseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemoveEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemoveKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TakeKeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +217,13 @@
       <Project>{9C2A3A57-3E50-4689-A9E1-F5CD4685D90B}</Project>
       <Name>DoorMan.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Doorman.Model\Doorman.Model.csproj">
+      <Project>{BAEFFDEF-FC7B-4612-B7EC-B33AF27C35F5}</Project>
+      <Name>Doorman.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Doorman.ViewModels
 {
-    public class GetKeyViewModel
+    public interface IRemoveEmployeeViewModel
     {
+
     }
 }

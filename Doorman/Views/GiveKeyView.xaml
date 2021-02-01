@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Doorman.Views.GetKeyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Doorman.Views"
+             xmlns:converters="clr-namespace:Doorman.Helpers.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:IntToString x:Key="intToString"></converters:IntToString>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"  Content="Imie" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
+        <TextBox Grid.Row="1" IsReadOnly = "{Binding GiveKeyModel.IsReadOnly }" Text="{Binding GiveKeyModel.FirstName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        
+        <Label Grid.Row="2"  Content="Nazwisko" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
+        <TextBox Grid.Row="3" IsReadOnly = "{Binding GiveKeyModel.IsReadOnly }"  Text="{Binding GiveKeyModel.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        
+        <Label Grid.Row="4"  Content="Numer klucza" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
+        <TextBox Grid.Row="5" Text="{Binding GiveKeyModel.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+
+        <Label Grid.Row="6" Visibility="{Binding GiveKeyModel.ShowEmployeeId, TargetNullValue='Collapsed'}"  Content="Podaj ID Pracownika" Margin="10 10 10 0" VerticalAlignment="Bottom"></Label>
+        <TextBox Grid.Row="7"  Visibility="{Binding GiveKeyModel.ShowEmployeeId, TargetNullValue='Collapsed'}" Text="{Binding GiveKeyModel.EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" VerticalAlignment="Center"></TextBox>
+        
+        <StackPanel Grid.Row="8" Orientation="Horizontal">
+            <Button  Content="Potwierd odbiór klucza" Command="{Binding GiveKey}" HorizontalAlignment="Left" Margin="10 0 10 10"></Button>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
