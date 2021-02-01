@@ -62,30 +62,39 @@ namespace Doorman.ViewModels
                     removeEmployee = new RelayCommand(
                        (object o) =>
                        {
-                           System.Console.WriteLine("ok");
-                           //Model.Key Key = _employeeRepository.GetKeyByRoomNumber(Employee.RoomNumber);
+                           int id= int.Parse(Employee.IdAsAString);
+                           Employee employee = _employeeRepository.GetById(id);
+                           bool employeeExist = employee != null;
                            //bool keyExist = Key != null;
 
-                           //if (keyExist && EmployeeNameVisiblity == "Collapsed")
-                           //{
-                           //    EmployeeNameVisiblity = "Visible";
-                           //    Employee.RoomName = _employeeRepository.GetRoomNameByRoomNumber(Employee.RoomNumber);
-                           //    ButtonText = "Usuń klucz";
-                           //    keyExist = true;
-                           //}
-                           //else if (keyExist && EmployeeNameVisiblity == "Visible")
-                           //{
-                           //    _employeeRepository.Remove(Key);
-                           //    MessageBox.Show("Klucz został usunięty");
-                           //    Employee.RoomNumber = "";
-                           //    EmployeeNameVisiblity = "Collapsed";
-                           //    ButtonText = "Szukaj pracownika";
-                           //}
-                           //else
-                           //{
-                           //    MessageBox.Show("Klucz nie istnieje w bazie. Proszę popraw jego numer", "Informacja");
-                           //    Employee.RoomNumber = "";
-                           //}
+                           if (employeeExist && EmployeeNameVisiblity == "Collapsed")
+                           {
+                               EmployeeNameVisiblity = "Visible";
+                               Employee.FirstName = employee.FirstName;
+                               Employee.LastName = employee.LastName;
+                               Employee.Department = employee.Department;
+                               Employee.Position = employee.Positon;
+                               //Employee.RoomName = _employeeRepository.GetRoomNameByRoomNumber(Employee.RoomNumber);
+                               ButtonText = "Usuń pracownika";
+                               //employeeExist = true;
+                           }
+                           else if (employeeExist && EmployeeNameVisiblity == "Visible")
+                           {
+                               _employeeRepository.Remove(employee);
+                               MessageBox.Show("Pracownik został usunięty");
+                               Employee.FirstName = "";
+                               Employee.LastName = "";
+                               Employee.Department = "";
+                               Employee.Position = "";
+                               EmployeeNameVisiblity = "Collapsed";
+                               ButtonText = "Szukaj pracownika";
+                           }
+                           else
+                           {
+                               MessageBox.Show("Pracownik nie istnieje w bazie. Popraw jego numer ID", "Informacja");
+                               Employee.IdAsAString = "";
+                               EmployeeNameVisiblity = "Collapsed";
+                           }
                        },
                        (object o) =>
                        {
