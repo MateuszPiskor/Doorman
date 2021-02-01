@@ -34,7 +34,7 @@ namespace Doorman.ViewModels
 
                          if (!keyExist)
                          {
-                             messageBoxList.Add("Taki klucz o takim numerze nie został porzyczony.");
+                             messageBoxList.Add("Nikt nie pobierał klucza o tym numerze.");
                              TakeKeyModelWrapper.KeyNumber = 0;
                          }
                          else

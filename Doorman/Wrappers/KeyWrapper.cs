@@ -6,6 +6,16 @@ namespace Doorman.Wrappers
     {
         private string roomName;
         private int roomNumber;
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value;
+                OnPropertyChange();
+            }
+        }
+
 
         public Key Model { get; set; }
 
@@ -40,6 +50,8 @@ namespace Doorman.Wrappers
                 ValidateProperty(nameof(RoomNumber));
             }
         }
+
+        
 
         private void ValidateProperty(string propertyName)
         {

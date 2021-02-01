@@ -107,21 +107,5 @@ namespace Doorman.Wrappers
                     }
             }
         }
-
-        
-
-
-        //protected override IEnumerable<string> ValidateProperty(string propertyName)
-        //{
-        //    switch (propertyName)
-        //    {
-        //        case nameof(FirstName):
-        //            if (string.Equals(FirstName, "Robot", StringComparison.OrdinalIgnoreCase))
-        //            {
-        //                yield return "Robots are not valid friends";
-        //            }
-        //            break;
-        //    }
-        //}
     }
 }
