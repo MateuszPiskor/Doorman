@@ -14,7 +14,7 @@ namespace Doorman.Wrappers
 
         private string firstName;
         private string lastName;
-        private int employeeId;
+        private string employeeId;
         private string roomNumber;
         private string showEmployeeId = "Collapsed";
         private bool isReadOnly;
@@ -41,7 +41,7 @@ namespace Doorman.Wrappers
             }
         }
 
-        public int EmployeeId
+        public string EmployeeId
         {
             get { return employeeId; }
             set
@@ -123,9 +123,9 @@ namespace Doorman.Wrappers
                     }
                     break;
                 case nameof(EmployeeId):
-                    if (EmployeeId <= 0 || EmployeeId > 9999)
+                    if (!Regex.IsMatch(roomNumber, @"^[0-9]{4}$"))
                     {
-                        AddError(propertyName, "Numer id musi się zawierać w przedziale od 1 do 9999");
+                        AddError(propertyName, "Numer id musi się składać z 4 cyfr");
                     }
                     break;
             }

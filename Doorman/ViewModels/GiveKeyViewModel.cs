@@ -23,7 +23,6 @@ namespace Doorman.ViewModels
         #endregion
         #region private members
 
-        private string messageBoxText;
         private IEmployeeRepository _employeeRepository;
         private IKeyInUseRepository _keyInUseReposiotory;
         private IKeyRepository _keyRepository;
@@ -156,7 +155,7 @@ namespace Doorman.ViewModels
                         else if (GiveKeyModel.ShowEmployeeId == "Visible")
                         {
                             if (_employeeRepository.GetAll().SingleOrDefault(e => e.FirstName == GiveKeyModel.FirstName &&
-                             e.LastName == GiveKeyModel.LastName && e.Id == GiveKeyModel.EmployeeId) != null)
+                             e.LastName == GiveKeyModel.LastName && e.Id == int.Parse(GiveKeyModel.EmployeeId)) != null)
                             {
                                 GiveKeyModel.IsReadOnly = false;
                                 return true;
@@ -196,7 +195,7 @@ namespace Doorman.ViewModels
 
         private bool AreAllPropertiesFielled()
         {
-            if ((GiveKeyModel.FirstName == null || GiveKeyModel.LastName == null || GiveKeyModel.RoomNumber == ""))
+            if ((GiveKeyModel.FirstName == null || GiveKeyModel.LastName == null || GiveKeyModel.RoomNumber == null))
             {
                 return false;
             }
