@@ -41,6 +41,7 @@ namespace Doorman.Wrappers
             set
             {
                 keyNumber = value;
+                OnPropertyChange();
                 ValidateProperty(nameof(KeyNumber));
             }
         }
@@ -50,6 +51,7 @@ namespace Doorman.Wrappers
             set
             {
                 lastName = value;
+                OnPropertyChange();
                 ValidateProperty(nameof(LastName));
             }
         }

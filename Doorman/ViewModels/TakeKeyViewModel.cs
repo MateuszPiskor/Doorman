@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using Key = Doorman.Model.Key;
 
 namespace Doorman.ViewModels
 {
@@ -29,41 +28,48 @@ namespace Doorman.ViewModels
                     takeKey = new RelayCommand(
                      (object o) =>
                      {
+                         //TO DO class to validate in correct way
                          messageBoxList.Clear();
-                         bool keyExist = true;
-                         Model.Key Key = _keyRepository.GetKeyByRoomNumber(TakeKeyModelWrapper.KeyNumber);
-                         if (Key == null)
-                         {
-                             keyExist = false;
-                         }
-
-                         KeyInUse keyInUse = _keyInUseReposiotory.GetByKeyId(Key.Id);
-
-                         bool keyInUsing = keyInUse != null;
-                         bool keyBelongsToThisEmployee = false;
-
-                         if (!keyInUsing)
-                         {
-                             messageBoxList.Add("Nikt nie pobierał klucza o tym numerze.");
-                             TakeKeyModelWrapper.KeyNumber = "";
-                         }
+                         bool keyExist = false;
+                         bool keyIsInUse = false;
+                         bool keyBelongToThisPerson = false;
+                         KeyInUse keyInUse = null;
+                         
+                         var key = _keyRepository.GetKeyByRoomNumber(TakeKeyModelWrapper.KeyNumber);
+                         if (key != null)
+                             keyExist = true;
                          else
                          {
-                             keyBelongsToThisEmployee = isKeyBelongsToThisEmploye(keyInUse);
-                             messageBoxList.Add($"Nie możesz zdać tego klucza\nKlucz ten został porzyczony przez {keyInUse.Employee.FirstName},{keyInUse.Employee.LastName}, {keyInUse.Employee.Department}\nMusi zostać zdany przez tą osobę"
-                                 );
-                             TakeKeyModelWrapper.KeyNumber = "";
+                             messageBoxList.Add("Klucz nie istnieje w bazie");
+                             ClearForm();
                          }
 
-                         if (keyExist && keyInUsing && keyBelongsToThisEmployee)
+                         if (keyExist)
+                         {
+                             keyInUse = _keyInUseReposiotory.GetByKeyId(key.Id);
+                             if (keyInUse != null)
+                                 keyIsInUse = true;
+                             else
+                             {
+                                 messageBoxList.Add("Klucz istnieje w bazie ale nikt go nie pobierał.");
+                                 ClearForm();
+                             }
+                         }
+                         
+                         if (keyExist && keyIsInUse)
+                             keyBelongToThisPerson = isKeyBelongsToThisEmploye(keyInUse);
+
+                         if (keyExist && keyIsInUse && keyBelongToThisPerson)
                          {
                              _keyInUseReposiotory.Remove(keyInUse);
+                             _keyInUseReposiotory.SaveAsync();
                              MessageBox.Show("Klucz został usniety z bazy", "Informacja");
                              ClearForm();
                          }
                          else
                          {
                              ShowAllMessage(messageBoxList);
+                             ClearForm();
                          }
 
                      },
@@ -95,7 +101,7 @@ namespace Doorman.ViewModels
         }
         private bool IsDataCorrect()
         {
-            if (!string.IsNullOrEmpty(TakeKeyModelWrapper.FirstName) && !string.IsNullOrEmpty(TakeKeyModelWrapper.LastName) && TakeKeyModelWrapper.KeyNumber != "")
+            if (!string.IsNullOrEmpty(TakeKeyModelWrapper.FirstName) && !string.IsNullOrEmpty(TakeKeyModelWrapper.LastName) && TakeKeyModelWrapper.KeyNumber != null)
             {
                 return true;
             }
@@ -106,7 +112,6 @@ namespace Doorman.ViewModels
         private bool isKeyBelongsToThisEmploye(KeyInUse keyInUse)
         {
             return keyInUse.Employee.FirstName == TakeKeyModelWrapper.FirstName && keyInUse.Employee.LastName == TakeKeyModelWrapper.LastName ? true : false;
-            //var keyInUse = _keyInUseReposiotory.GetEmployeeKey(TakeKeyModelWrapper);
         }
 
         private void ShowAllMessage(List<string> messageBoxList)
