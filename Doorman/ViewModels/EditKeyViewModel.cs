@@ -1,38 +1,28 @@
 ﻿using Doorman.DataServices;
+using Doorman.Model;
+using Doorman.Wrappers;
 using System.Windows.Input;
 using Key = Doorman.Model.Key;
 
 namespace Doorman.ViewModels
 {
-    public class EditKeyViewModel : ViewModelBase, IEditKeyViewModel
+    public class EditKeyViewModel : NotficationErrorBaseClass, IEditKeyViewModel
     {
         #region private members
-        Key key = new Key();
-        private Key keyFound;
-        private int id;
+        private KeyEditModelWrapper keyEditWrapper;
+
+        public KeyEditModelWrapper KeyEditModelWrapper
+        {
+            get { return keyEditWrapper; }
+            set { keyEditWrapper = value; }
+        }
+        
         private IKeyRepository _keyRepository;
         ICommand addKey;
         #endregion
         #region properties
-        public Key KeyForund
-        {
-            get { return keyFound; }
-            set
-            {
-                keyFound = value;
-                OnPropertyChange();
-
-            }
-        }
-        public int Id
-        {
-            get { return id; }
-            set
-            {
-                id = value;
-                OnPropertyChange();
-            }
-        }
+        
+       
         public ICommand SearchKey
         {
             get
@@ -42,16 +32,12 @@ namespace Doorman.ViewModels
                     addKey = new RelayCommand(
                        (object o) =>
                        {
-                           keyFound = _keyRepository.GetById(id);
+                          var key = _keyRepository.GetById(KeyEditModelWrapper.Id);
                            base.OnPropertyChange();
                        },
                        (object o) =>
                        {
-                           if (id > 1 && id < 9999)
-                           {
-                               return true;
-                           }
-                           return false;
+                           return KeyEditModelWrapper != null && !KeyEditModelWrapper.HasErrors;
                        });
                 }
 
@@ -63,6 +49,7 @@ namespace Doorman.ViewModels
         public EditKeyViewModel(IKeyRepository keyRepository)
         {
             _keyRepository = keyRepository;
+            keyEditWrapper = new KeyEditModelWrapper(new KeyEditModel());
         }
         #endregion
         #region privatemethods
